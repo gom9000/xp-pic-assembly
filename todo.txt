@@ -1,0 +1,44 @@
+PIC Assembly eXPerience 
+
+PHASE I
+-------
+
+- xp-pic-asm-scheduler-library:
+- xp-pic-asm-scheduler-library-test:
+	Add auto-configuration by processor & OSCFREQ (2.5, 4, 10, 20)
+	Refs: AN964, https://pic-rosa.blogspot.it/2007/09/source-code-for-pic.html
+
+
+
+PHASE II
+--------
+
+- xp-pic-asm-digital-io
+    input 4 switch:
+		sw1 temporary not debounced
+		sw2 button not debounced
+		sw3 temporary software debounced
+		sw4 button software debounced
+	output 4 switches status led
+
+- xp-pic-asm-digital-io-matrix
+
+- xp-pic-asm-analog-in
+	
+- xp-pic-asm-usart
+    serial rs232 helo server for drive led on/off/blink
+- xp-pic-asm-usart-library:
+    routine for port TX/RX pin settings
+    ritorno di più di un valore da una procedura (tipicamente registro con il dato e registro di stato).
+
+-tebos:
+	- tebo psu5v
+	- tebo psu-distrib
+	- tebo mcu16f6x8
+	- tebo switch/led
+	- tebo switch-matrix-4-4, switch-matrix-4-4-mux
+	- tebo led-matrix-4-4, led-matrix-4-4-mux
+	- tebo analog-input-2
+	- tebo display-7seg
+	- tebo rs232
+	
