@@ -9,3 +9,5 @@ Simple implementation of 20MHz delay routines base on code from: http://www.picl
 A Library version of the delay routines.
 * [xp-pic-asm-delay-library-test](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-delay-library-test.X/)
 Test code for the delay library.
+* [xp-pic-asm-scheduler](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler.X/)
+A simple scheduler manager for executing tasks at regular intervals.
