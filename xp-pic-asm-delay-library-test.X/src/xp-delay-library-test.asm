@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)filename.asm
+; @(#)xp-delay-library-test.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -14,18 +14,16 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC #pic_model# Microcontroller
+; Target.....: Microchip PIC 16F648A Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
-; Version....: #x.y# #release_date# - #whatsnew#
-;              #x.y# #release_date# - #whatsnew#
-; Description: #program description#
+; Version....: 1.0 2018/03/09
+; Description: Test program for xp-delay library
 ;=============================================================================
 
     PROCESSOR   16f648a
     __CONFIG    _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _HS_OSC
-;    __CONFIG   _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_OFF & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_NOCLKOUT
     INCLUDE     <p16f648a.inc>
-    INCLUDE     "../xp-pic-asm-xxx-library.X/src/xp-xxx-library.inc"
+    INCLUDE     "../xp-pic-asm-delay-library.X/src/xp-delay-library.inc"
 
 
 ;=============================================================================
@@ -45,6 +43,16 @@ RESET   CODE    0x0000                          ; processor reset vector
 ;=============================================================================
         CODE                                    ; begin program
 START
-		nop
+        call    DELAY2500
+        call    DELAY5000
+        call    DELAY10000
+        call    DELAY25000
+        call    DELAY50000
+        call    DELAY100000
+        call    DELAY250000
+        call    DELAY500000
+        call    DELAY1250000
+        call    DELAY2500000
+        call    DELAY5000000
 
         END                                     ; end program

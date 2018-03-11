@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)filename.asm
+; @(#)delay10000.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -14,40 +14,46 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC #pic_model# Microcontroller
+; Target.....: Microchip PIC 16Fxxx Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
-; Version....: #x.y# #release_date# - #whatsnew#
-;              #x.y# #release_date# - #whatsnew#
+; Version....: 1.0 2018/03/09
 ;
-; Module.....: #module_name#
-; Description: #module description#
+; Module.....: DELAY10000
+; Description: 10000 cycles delay routine
 ;=============================================================================
 
-        TITLE       'module_name - Initialize the scheduler'
-        SUBTITLE    'Part of the xp-pic-asm-xxx-library'
+        TITLE       'DELAY10000 - 10000 cycles delay'
+        SUBTITLE    'Part of the xp-delay-library'
 
-        INCLUDE     processor.inc
-        INCLUDE     library_name-labels.inc
-
-        GLOBAL      module_name
-        GLOBAL      SCREG
-        GLOBAL      sc1Counter
+        GLOBAL      DELAY10000
 
 
 ;=============================================================================
 ; Variable declarations
 ;=============================================================================
 GPR_VAR         UDATA
-SCREG           RES         1                   ; scheduler bitflags register
-sc1Counter      RES         1                   ; 2ms counter
+localvar1       RES         1
+localvar2       RES         1
 
 
 ;=============================================================================
 ; Module
 ;=============================================================================
         CODE                                    ; begin module
-module_name
+DELAY10000
 
-		nop
+        movlw       0xCE                        ; 9993 cycles
+        movwf       localvar1
+        movlw       0x08
+        movwf       localvar2
+delay10000_inner_loop
+        decfsz      localvar1, F
+        goto        $+2
+        decfsz      localvar2, F
+        goto        delay10000_inner_loop 
+        goto        $+1                         ; 3 cycles
+        nop
+
+        return                                  ; 4 cycles (including call)
 
         END                                     ; end module
