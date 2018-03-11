@@ -16,8 +16,8 @@
 ; Company....: gos95
 ; Target.....: Microchip PIC 16F648a Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
-; Version....: 1.0 2017/03/21
-;              1.1 2018/03/11 - source refactory
+; Version....: 1.1 2018/03/11 - source refactory
+;              1.0 2017/03/21
 ; Description: Simple implementation of 20MHz delay routines base on code from:
 ;              http://www.piclist.com/techref/piclist/codegen/delay.htm
 ;=============================================================================
