@@ -1,14 +1,5 @@
 PIC Assembly eXPerience 
 
-PHASE I
--------
-
-- xp-pic-asm-scheduler-library:
-- xp-pic-asm-scheduler-library-test:
-	Add auto-configuration by processor & OSCFREQ (2.5, 4, 10, 20)
-	Refs: AN964, https://pic-rosa.blogspot.it/2007/09/source-code-for-pic.html
-
-
 
 PHASE II
 --------

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/task_100ms_action.asm src/task_10ms_action.asm src/task_1s_action.asm src/task_250ms_action.asm src/task_2ms_action.asm src/task_2s_action.asm src/task_500ms_action.asm src/task_50ms_action.asm src/xp-scheduler-library-test.asm
+SOURCEFILES_QUOTED_IF_SPACED=src/xp-scheduler-library-test.asm src/xpsc1of_action.asm src/xpsc2of_action.asm src/xpsc3of_action.asm src/xpsc4of_action.asm src/xpsc5of_action.asm src/xpsc6of_action.asm src/xpsc7of_action.asm src/xpsc8of_action.asm
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/task_100ms_action.o ${OBJECTDIR}/src/task_10ms_action.o ${OBJECTDIR}/src/task_1s_action.o ${OBJECTDIR}/src/task_250ms_action.o ${OBJECTDIR}/src/task_2ms_action.o ${OBJECTDIR}/src/task_2s_action.o ${OBJECTDIR}/src/task_500ms_action.o ${OBJECTDIR}/src/task_50ms_action.o ${OBJECTDIR}/src/xp-scheduler-library-test.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/task_100ms_action.o.d ${OBJECTDIR}/src/task_10ms_action.o.d ${OBJECTDIR}/src/task_1s_action.o.d ${OBJECTDIR}/src/task_250ms_action.o.d ${OBJECTDIR}/src/task_2ms_action.o.d ${OBJECTDIR}/src/task_2s_action.o.d ${OBJECTDIR}/src/task_500ms_action.o.d ${OBJECTDIR}/src/task_50ms_action.o.d ${OBJECTDIR}/src/xp-scheduler-library-test.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/xp-scheduler-library-test.o ${OBJECTDIR}/src/xpsc1of_action.o ${OBJECTDIR}/src/xpsc2of_action.o ${OBJECTDIR}/src/xpsc3of_action.o ${OBJECTDIR}/src/xpsc4of_action.o ${OBJECTDIR}/src/xpsc5of_action.o ${OBJECTDIR}/src/xpsc6of_action.o ${OBJECTDIR}/src/xpsc7of_action.o ${OBJECTDIR}/src/xpsc8of_action.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/xp-scheduler-library-test.o.d ${OBJECTDIR}/src/xpsc1of_action.o.d ${OBJECTDIR}/src/xpsc2of_action.o.d ${OBJECTDIR}/src/xpsc3of_action.o.d ${OBJECTDIR}/src/xpsc4of_action.o.d ${OBJECTDIR}/src/xpsc5of_action.o.d ${OBJECTDIR}/src/xpsc6of_action.o.d ${OBJECTDIR}/src/xpsc7of_action.o.d ${OBJECTDIR}/src/xpsc8of_action.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/task_100ms_action.o ${OBJECTDIR}/src/task_10ms_action.o ${OBJECTDIR}/src/task_1s_action.o ${OBJECTDIR}/src/task_250ms_action.o ${OBJECTDIR}/src/task_2ms_action.o ${OBJECTDIR}/src/task_2s_action.o ${OBJECTDIR}/src/task_500ms_action.o ${OBJECTDIR}/src/task_50ms_action.o ${OBJECTDIR}/src/xp-scheduler-library-test.o
+OBJECTFILES=${OBJECTDIR}/src/xp-scheduler-library-test.o ${OBJECTDIR}/src/xpsc1of_action.o ${OBJECTDIR}/src/xpsc2of_action.o ${OBJECTDIR}/src/xpsc3of_action.o ${OBJECTDIR}/src/xpsc4of_action.o ${OBJECTDIR}/src/xpsc5of_action.o ${OBJECTDIR}/src/xpsc6of_action.o ${OBJECTDIR}/src/xpsc7of_action.o ${OBJECTDIR}/src/xpsc8of_action.o
 
 # Source Files
-SOURCEFILES=src/task_100ms_action.asm src/task_10ms_action.asm src/task_1s_action.asm src/task_250ms_action.asm src/task_2ms_action.asm src/task_2s_action.asm src/task_500ms_action.asm src/task_50ms_action.asm src/xp-scheduler-library-test.asm
+SOURCEFILES=src/xp-scheduler-library-test.asm src/xpsc1of_action.asm src/xpsc2of_action.asm src/xpsc3of_action.asm src/xpsc4of_action.asm src/xpsc5of_action.asm src/xpsc6of_action.asm src/xpsc7of_action.asm src/xpsc8of_action.asm
 
 
 CFLAGS=
@@ -94,70 +94,6 @@ MP_LINKER_DEBUG_OPTION=
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/src/task_100ms_action.o: src/task_100ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_100ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_100ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_100ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_100ms_action.lst\" -e\"${OBJECTDIR}/src/task_100ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_100ms_action.o\" \"src/task_100ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_100ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_100ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_10ms_action.o: src/task_10ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_10ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_10ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_10ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_10ms_action.lst\" -e\"${OBJECTDIR}/src/task_10ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_10ms_action.o\" \"src/task_10ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_10ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_10ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_1s_action.o: src/task_1s_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_1s_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_1s_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_1s_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_1s_action.lst\" -e\"${OBJECTDIR}/src/task_1s_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_1s_action.o\" \"src/task_1s_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_1s_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_1s_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_250ms_action.o: src/task_250ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_250ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_250ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_250ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_250ms_action.lst\" -e\"${OBJECTDIR}/src/task_250ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_250ms_action.o\" \"src/task_250ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_250ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_250ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_2ms_action.o: src/task_2ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_2ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_2ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_2ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_2ms_action.lst\" -e\"${OBJECTDIR}/src/task_2ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_2ms_action.o\" \"src/task_2ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_2ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_2ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_2s_action.o: src/task_2s_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_2s_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_2s_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_2s_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_2s_action.lst\" -e\"${OBJECTDIR}/src/task_2s_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_2s_action.o\" \"src/task_2s_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_2s_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_2s_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_500ms_action.o: src/task_500ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_500ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_500ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_500ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_500ms_action.lst\" -e\"${OBJECTDIR}/src/task_500ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_500ms_action.o\" \"src/task_500ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_500ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_500ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_50ms_action.o: src/task_50ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_50ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_50ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_50ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_50ms_action.lst\" -e\"${OBJECTDIR}/src/task_50ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_50ms_action.o\" \"src/task_50ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_50ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_50ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
 ${OBJECTDIR}/src/xp-scheduler-library-test.o: src/xp-scheduler-library-test.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-scheduler-library-test.o.d 
@@ -166,71 +102,71 @@ ${OBJECTDIR}/src/xp-scheduler-library-test.o: src/xp-scheduler-library-test.asm 
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-scheduler-library-test.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-scheduler-library-test.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/src/xpsc1of_action.o: src/xpsc1of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc1of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc1of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc1of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc1of_action.lst\" -e\"${OBJECTDIR}/src/xpsc1of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc1of_action.o\" \"src/xpsc1of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc1of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc1of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc2of_action.o: src/xpsc2of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc2of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc2of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc2of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc2of_action.lst\" -e\"${OBJECTDIR}/src/xpsc2of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc2of_action.o\" \"src/xpsc2of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc2of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc2of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc3of_action.o: src/xpsc3of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc3of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc3of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc3of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc3of_action.lst\" -e\"${OBJECTDIR}/src/xpsc3of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc3of_action.o\" \"src/xpsc3of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc3of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc3of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc4of_action.o: src/xpsc4of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc4of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc4of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc4of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc4of_action.lst\" -e\"${OBJECTDIR}/src/xpsc4of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc4of_action.o\" \"src/xpsc4of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc4of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc4of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc5of_action.o: src/xpsc5of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc5of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc5of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc5of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc5of_action.lst\" -e\"${OBJECTDIR}/src/xpsc5of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc5of_action.o\" \"src/xpsc5of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc5of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc5of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc6of_action.o: src/xpsc6of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc6of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc6of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc6of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc6of_action.lst\" -e\"${OBJECTDIR}/src/xpsc6of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc6of_action.o\" \"src/xpsc6of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc6of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc6of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc7of_action.o: src/xpsc7of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc7of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc7of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc7of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc7of_action.lst\" -e\"${OBJECTDIR}/src/xpsc7of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc7of_action.o\" \"src/xpsc7of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc7of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc7of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc8of_action.o: src/xpsc8of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc8of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc8of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc8of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_SIMULATOR=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc8of_action.lst\" -e\"${OBJECTDIR}/src/xpsc8of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc8of_action.o\" \"src/xpsc8of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc8of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc8of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 else
-${OBJECTDIR}/src/task_100ms_action.o: src/task_100ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_100ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_100ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_100ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_100ms_action.lst\" -e\"${OBJECTDIR}/src/task_100ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_100ms_action.o\" \"src/task_100ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_100ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_100ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_10ms_action.o: src/task_10ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_10ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_10ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_10ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_10ms_action.lst\" -e\"${OBJECTDIR}/src/task_10ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_10ms_action.o\" \"src/task_10ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_10ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_10ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_1s_action.o: src/task_1s_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_1s_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_1s_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_1s_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_1s_action.lst\" -e\"${OBJECTDIR}/src/task_1s_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_1s_action.o\" \"src/task_1s_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_1s_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_1s_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_250ms_action.o: src/task_250ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_250ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_250ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_250ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_250ms_action.lst\" -e\"${OBJECTDIR}/src/task_250ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_250ms_action.o\" \"src/task_250ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_250ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_250ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_2ms_action.o: src/task_2ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_2ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_2ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_2ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_2ms_action.lst\" -e\"${OBJECTDIR}/src/task_2ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_2ms_action.o\" \"src/task_2ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_2ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_2ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_2s_action.o: src/task_2s_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_2s_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_2s_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_2s_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_2s_action.lst\" -e\"${OBJECTDIR}/src/task_2s_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_2s_action.o\" \"src/task_2s_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_2s_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_2s_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_500ms_action.o: src/task_500ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_500ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_500ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_500ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_500ms_action.lst\" -e\"${OBJECTDIR}/src/task_500ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_500ms_action.o\" \"src/task_500ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_500ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_500ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
-${OBJECTDIR}/src/task_50ms_action.o: src/task_50ms_action.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/task_50ms_action.o.d 
-	@${RM} ${OBJECTDIR}/src/task_50ms_action.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/task_50ms_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/task_50ms_action.lst\" -e\"${OBJECTDIR}/src/task_50ms_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/task_50ms_action.o\" \"src/task_50ms_action.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/task_50ms_action.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/task_50ms_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
 ${OBJECTDIR}/src/xp-scheduler-library-test.o: src/xp-scheduler-library-test.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-scheduler-library-test.o.d 
@@ -238,6 +174,70 @@ ${OBJECTDIR}/src/xp-scheduler-library-test.o: src/xp-scheduler-library-test.asm 
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-scheduler-library-test.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-scheduler-library-test.lst\" -e\"${OBJECTDIR}/src/xp-scheduler-library-test.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-scheduler-library-test.o\" \"src/xp-scheduler-library-test.asm\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-scheduler-library-test.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-scheduler-library-test.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc1of_action.o: src/xpsc1of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc1of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc1of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc1of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc1of_action.lst\" -e\"${OBJECTDIR}/src/xpsc1of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc1of_action.o\" \"src/xpsc1of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc1of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc1of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc2of_action.o: src/xpsc2of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc2of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc2of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc2of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc2of_action.lst\" -e\"${OBJECTDIR}/src/xpsc2of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc2of_action.o\" \"src/xpsc2of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc2of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc2of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc3of_action.o: src/xpsc3of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc3of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc3of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc3of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc3of_action.lst\" -e\"${OBJECTDIR}/src/xpsc3of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc3of_action.o\" \"src/xpsc3of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc3of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc3of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc4of_action.o: src/xpsc4of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc4of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc4of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc4of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc4of_action.lst\" -e\"${OBJECTDIR}/src/xpsc4of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc4of_action.o\" \"src/xpsc4of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc4of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc4of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc5of_action.o: src/xpsc5of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc5of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc5of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc5of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc5of_action.lst\" -e\"${OBJECTDIR}/src/xpsc5of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc5of_action.o\" \"src/xpsc5of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc5of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc5of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc6of_action.o: src/xpsc6of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc6of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc6of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc6of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc6of_action.lst\" -e\"${OBJECTDIR}/src/xpsc6of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc6of_action.o\" \"src/xpsc6of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc6of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc6of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc7of_action.o: src/xpsc7of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc7of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc7of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc7of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc7of_action.lst\" -e\"${OBJECTDIR}/src/xpsc7of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc7of_action.o\" \"src/xpsc7of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc7of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc7of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xpsc8of_action.o: src/xpsc8of_action.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xpsc8of_action.o.d 
+	@${RM} ${OBJECTDIR}/src/xpsc8of_action.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xpsc8of_action.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xpsc8of_action.lst\" -e\"${OBJECTDIR}/src/xpsc8of_action.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xpsc8of_action.o\" \"src/xpsc8of_action.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xpsc8of_action.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xpsc8of_action.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 endif
 

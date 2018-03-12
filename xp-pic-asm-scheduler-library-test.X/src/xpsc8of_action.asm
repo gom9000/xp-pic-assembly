@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_50ms_action.asm
+; @(#)xpsc8of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_50ms_action
-; Description: action code of 50ms period task
+; Routine....: xpsc8of_action
+; Description: action code for SC8 period task
 ;
 ;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_50ms_action
+        GLOBAL      xpsc8of_action
 
 
 ;=============================================================================
-; 50ms-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_50ms_action
+xpsc8of_action
 
         nop
 

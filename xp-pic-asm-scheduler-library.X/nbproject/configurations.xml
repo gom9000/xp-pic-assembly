@@ -13,10 +13,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/scheduler-init.asm</itemPath>
-      <itemPath>src/processor.inc</itemPath>
       <itemPath>src/scheduler-loop.asm</itemPath>
       <itemPath>src/scheduler-labels.inc</itemPath>
       <itemPath>src/xp-scheduler-library.inc</itemPath>
+      <itemPath>src/processor.inc</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

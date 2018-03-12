@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_100ms_action.asm
+; @(#)xpsc4of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_100ms_action
-; Description: action code of 100ms period task
+; Routine....: xpsc4of_action
+; Description: action code for SC4 period task
 ;
 ;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_100ms_action
+        GLOBAL      xpsc4of_action
 
 
 ;=============================================================================
-; 100ms-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_100ms_action
+xpsc4of_action
 
         nop
 

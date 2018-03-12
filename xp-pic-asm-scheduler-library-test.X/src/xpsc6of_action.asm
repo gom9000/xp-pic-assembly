@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_2ms_action.asm
+; @(#)xpsc6of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_2ms_action
-; Description: action code of 2ms period task
+; Routine....: xpsc6of_action
+; Description: action code for SC6 period task
 ;
 ;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_2ms_action
+        GLOBAL      xpsc6of_action
 
 
 ;=============================================================================
-; 2ms-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_2ms_action
+xpsc6of_action
 
         nop
 

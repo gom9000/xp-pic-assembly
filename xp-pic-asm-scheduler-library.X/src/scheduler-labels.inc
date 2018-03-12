@@ -22,19 +22,27 @@
 ;  Label equates.
 ;=============================================================================
 
-;----- SCREG overflow bitflags -----------------------------------------------
-SC1OF           equ     0x00                    ; SCREG<0>
-SC2OF           equ     0x01                    ; SCREG<1>
-SC3OF           equ     0x02                    ; SCREG<2>
-SC4OF           equ     0x03                    ; SCREG<3>
-SC5OF           equ     0x04                    ; SCREG<4>
-SC6OF           equ     0x05                    ; SCREG<5>
-SC7OF           equ     0x06                    ; SCREG<6>
-SC8OF           equ     0x07                    ; SCREG<7>
+;----- XPSCREG overflow bitflags ---------------------------------------------
+SC1OF           equ     0x00                    ; XPSCREG<0>
+SC2OF           equ     0x01                    ; XPSCREG<1>
+SC3OF           equ     0x02                    ; XPSCREG<2>
+SC4OF           equ     0x03                    ; XPSCREG<3>
+SC5OF           equ     0x04                    ; XPSCREG<4>
+SC6OF           equ     0x05                    ; XPSCREG<5>
+SC7OF           equ     0x06                    ; XPSCREG<6>
+SC8OF           equ     0x07                    ; XPSCREG<7>
 
 
 ;----- counters init cycles --------------------------------------------------
-; on 20MHz FOSC : 2ms, 10ms, 50ms, 100ms, 250ms, 500ms, 1s, 2s
+;  cycles        20MHz   16MHz   10MHz   4MHz
+;   10000         2ms    2.5ms    4ms    10ms
+;   50000        10ms   12.5ms   20ms    50ms
+;  250000        50ms   62.5ms  100ms   250ms
+;  500000       100ms    125ms  200ms   500ms
+; 1250000       250ms  312.5ms  500ms  1.25s
+; 2500000       500ms    625ms    1s    2.5s
+; 5000000         1s    1.25s     2s      5s
+;10000000         2s    2.5s      4s     10s
 SC1CYCLES       equ     d'5'                    ; 5 x timer0 cycles =   10000
 SC2CYCLES       equ     d'5'                    ; 5 x SC1 cycles    =   50000
 SC3CYCLES       equ     d'5'                    ; 5 x SC2 cycles    =  250000

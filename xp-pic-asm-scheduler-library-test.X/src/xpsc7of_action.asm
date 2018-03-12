@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_1s_action.asm
+; @(#)xpsc7of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_1s_action
-; Description: action code of 1s period task
+; Routine....: xpsc7of_action
+; Description: action code for SC7 period task
 ;
 ;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_1s_action
+        GLOBAL      xpsc7of_action
 
 
 ;=============================================================================
-; 1s-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_1s_action
+xpsc7of_action
 
         nop
 

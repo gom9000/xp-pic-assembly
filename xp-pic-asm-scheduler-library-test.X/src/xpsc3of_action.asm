@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_250ms_action.asm
+; @(#)xpsc3of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_250ms_action
-; Description: action code of 250ms period task
+; Routine....: xpsc3of_action
+; Description: action code for SC3 period task
 ;
 ;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_250ms_action
+        GLOBAL      xpsc3of_action
 
 
 ;=============================================================================
-; 250ms-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_250ms_action
+xpsc3of_action
 
         nop
 

@@ -26,13 +26,11 @@
         TITLE       'SCHEDULERinit - Initialize the scheduler'
         SUBTITLE    'Part of the xp-pic-asm-scheduler-library'
 
-
         INCLUDE     processor.inc
         INCLUDE     scheduler-labels.inc
 
-
         GLOBAL      SCHEDULERinit
-        GLOBAL      SCREG
+        GLOBAL      XPSCREG
         GLOBAL      sc1Counter
         GLOBAL      sc2Counter
         GLOBAL      sc3Counter
@@ -47,16 +45,16 @@
 ; Variable declarations
 ;=============================================================================
 GPR_VAR         UDATA
-SCREG           RES         1                   ; scheduler bitflags register
+XPSCREG         RES         1                   ; scheduler bitflags register
 
-sc1Counter      RES         1                   ; 2ms counter
-sc2Counter      RES         1                   ; 10ms counter
-sc3Counter      RES         1                   ; 50ms counter
-sc4Counter      RES         1                   ; 100ms counter
-sc5Counter      RES         1                   ; 250ms counter
-sc6Counter      RES         1                   ; 500ms counter
-sc7Counter      RES         1                   ; 1s counter
-sc8Counter      RES         1                   ; 2s counter
+sc1Counter      RES         1                   ; 10000 cycles counter
+sc2Counter      RES         1                   ; 50000 cycles counter
+sc3Counter      RES         1                   ; 250000 cycles counter
+sc4Counter      RES         1                   ; 500000 cycles counter
+sc5Counter      RES         1                   ; 1250000 cycles counter
+sc6Counter      RES         1                   ; 2500000 cycles counter
+sc7Counter      RES         1                   ; 500000 cycles counter
+sc8Counter      RES         1                   ; 1000000 cycles counter
 
 
 ;=============================================================================

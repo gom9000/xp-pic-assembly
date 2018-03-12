@@ -44,7 +44,7 @@ RESET   CODE    0x0000                          ; processor reset vector
 ;=============================================================================
         CODE                                    ; begin program
 START
-        call    SCHEDULERinit
-        call    SCHEDULERloop
+        call   SCHEDULERinit
+        call   SCHEDULERloop
 
         END                                     ; end program

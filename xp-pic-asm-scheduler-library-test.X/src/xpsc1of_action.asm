@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)task_500ms_action.asm
+; @(#)xpsc1of_action.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -19,20 +19,20 @@
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
 ;
-; Routine....: task_500ms_action
-; Description: action code of 500ms period task
+; Routine....: xpsc1of_action
+; Description: action code for SC1 period task
 ;
-;   This routine must be overrided with task code.
+;  This routine must be overrided with task code.
 ;=============================================================================
 
-        GLOBAL      task_500ms_action
+        GLOBAL      xpsc1of_action
 
 
 ;=============================================================================
-; 500ms-delay Task
+; Task
 ;=============================================================================
         CODE                                    ; begin module
-task_500ms_action
+xpsc1of_action
 
         nop
 
