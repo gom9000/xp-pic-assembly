@@ -5,12 +5,6 @@ PHASE II
 --------
 
 - xp-pic-asm-digital-io
-    input 4 switch:
-		sw1 temporary not debounced
-		sw2 button not debounced
-		sw3 temporary software debounced
-		sw4 button software debounced
-	output 4 switches status led
 
 - xp-pic-asm-digital-io-matrix
 
