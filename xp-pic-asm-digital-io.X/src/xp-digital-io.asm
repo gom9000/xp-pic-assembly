@@ -51,8 +51,9 @@ LED4            equ     0x03
         pclath_temp                     ; variable used for context saving
 
         d1, d2, d3                      ; the delay routine vars
-        SWDOWNREG                       ; register for switches press state
-        SWEVENTREG                      ; register for switches events state
+
+        swstatereg                      ;register for switches state (1=UP, 0=DW)
+        sample_counter
     endc
 
 
@@ -223,53 +224,39 @@ delay5ms_loop
         return                              ;4 cycles (including call)
 
 
-;=============================================================================
-;  blink leds routines
-;=============================================================================
-blink_leds_10ms
-        bsf         LED, LED1
-        bsf         LED, LED2
-        bsf         LED, LED3
-        bsf         LED, LED4
-        call        delay10ms
-        bcf         LED, LED1
-        bcf         LED, LED2
-        bcf         LED, LED3
-        bcf         LED, LED4
-        call        delay10ms
-        goto        blink_leds_10ms
+;  1ms delay routine (20MHz)
+delay1ms
+        movlw       0xE6                    ;4993 cycles
+        movwf       d1
+        movlw       0x04
+        movwf       d2
+delay1ms_loop
+        decfsz      d1, F
+        goto        $+2
+        decfsz      d2, F
+        goto        delay1ms_loop
+        goto        $+1                     ;3 cycles
+        nop
 
-        return
+        return                              ;4 cycles (including call)
 
-blink_leds_1s
-        bsf         LED, LED1
-        bsf         LED, LED2
-        bsf         LED, LED3
-        bsf         LED, LED4
-        call        delay1s
-        bcf         LED, LED1
-        bcf         LED, LED2
-        bcf         LED, LED3
-        bcf         LED, LED4
-        call        delay1s
-        goto        blink_leds_1s
 
-        return
 ;=============================================================================
 ;  Main program
 ;=============================================================================
 main
 		call 		init_ports
 
-        clrf        SWDOWNREG
-        clrf        SWEVENTREG
         bcf         LED, LED1
         bcf         LED, LED2
         bcf         LED, LED3
         bcf         LED, LED4
 
+        movlw       b'0001111'
+        movwf       swstatereg
+        clrf        sample_counter
 mainloop
-        
+
 switch_1_control ; momentary toggling switch with no debounce
         btfsc       SWITCH, SW1
         goto        switch_2_control
@@ -279,85 +266,54 @@ switch_1_control ; momentary toggling switch with no debounce
         goto        switch_2_control
         bcf         LED, LED1
 
-switch_2_control ; momentary toggling switch with event debounce
-        btfsc       SWITCH, SW2             ; switch is pressed?
-        goto        switch_1_release        ;   no, go to next switch
 
-        btfsc       SWDOWNREG, SW2          ;   yes, was pressed on prev loop?
-        goto        $+3                     ;     yes, managed pressed switch
-        bsf         SWDOWNREG, SW2          ;     no, set SW pressed status
-        goto        switch_3_control        ;     and go to next switch
+switch_2_control
+switch_3_control
 
-        btfsc       SWEVENTREG, SW2         ; switch event already fired?
-        goto        switch_3_control        ;   yes, do nothing and go to next switch
 
-        bsf         SWEVENTREG, SW2         ;   no, do stuff...
-        btfsc       LED, LED2
+switch_4_control ; momentary toggling switch with sampling debounce
+        btfsc       swstatereg, SW4         ; last SW stable state is UP?
+        goto        sample_sw_up
+
+sample_sw_down                              ; scan for SW = DW
+        clrw
+        btfss       SWITCH, SW4             ; if SW is DW
+        incf        sample_counter, W       ; inc counter to W
+        movwf       sample_counter          ; store W value to F and count samples
+        goto        count_samples
+
+sample_sw_up                                ; scan for SW = UP
+        clrw
+        btfsc       SWITCH, SW4             ; if SW is UP
+        incf        sample_counter, W       ; inc counter to W
+        movwf       sample_counter          ; store W value to F and count samples
+
+count_samples                               ; execute debounce
+        movf        sample_counter, W       ; counter value reached sample size?
+        xorlw       5
+        btfss       STATUS, Z
+        goto        end_sw_controls
+
+        btfsc       swstatereg, SW4         ; invert SW stable state
         goto        $+3
-        bsf         LED, LED2
-        goto        switch_3_control
-        bcf         LED, LED2
-switch_1_release
-        bcf         SWDOWNREG, SW2            ; reset SW status registers
-        bcf         SWEVENTREG, SW2           ;
+        bsf         swstatereg, SW4
+        goto        $+2
+        bcf         swstatereg, SW4
 
-switch_3_control ; momentary toggling switch with delay debounce
-        btfsc       SWITCH, SW3
-        goto        switch_4_control
-        call        delay10ms
-        btfsc       SWITCH, SW3
-        goto        switch_4_control
-        btfsc       LED, LED3
+        clrf        sample_counter          ; clear and go to the SW action
+        btfss       swstatereg, SW4
+        goto        end_sw_controls
+
+switch_action                               ; do action
+        btfsc       LED, LED4
         goto        $+3
-        bsf         LED, LED3
-        goto        switch_4_control
-        bcf         LED, LED3
+        bsf         LED, LED4
+        goto        end_sw_controls
+        bcf         LED, LED4
 
-switch_4_control ; momentary switch with delay to toggling momentary switch with debounce
+
 end_sw_controls
-        call        delay50ms
+        call        delay1ms
         goto        mainloop
-
-
-
-;switch_2_control                            ; toggling momentary switch with debounce
-;        btfsc       SWITCH, SW2
-;        goto        switch_3_control
-;        call        delay25ms
-;        btfsc       SWITCH, SW2
-;        goto        switch_3_control
-;        btfsc       LED, LED2
-;        goto        $+3
-;        bsf         LED, LED2
-;        goto        switch_3_control
-;        bcf         LED, LED2
-;
-;
-;switch_3_control                            ; momentary switch with no debounce
-;        btfss       SWITCH, SW3
-;        bsf         LED, LED3
-;
-;
-;switch_4_control                            ; momentary switch with delay to
-;                                            ; toggling momentary switch with debounce
-;        btfsc       SWITCH, SW4
-;        goto        end_sw_controls
-;        bsf         LED, LED4
-;
-;        call        delay50ms
-;        bsf         LED, LED4
-;        call        delay50ms
-;
-;        btfsc       SWITCH, SW4
-;        goto        end_sw_controls
-;        btfsc       LED, LED4
-;        goto        $+3
-;        bsf         LED, LED4
-;        goto        end_sw_controls
-;        bcf         LED, LED4
-;
-;end_sw_controls
-;        call        delay10ms
-;        goto        mainloop
 
         end
