@@ -1,5 +1,5 @@
 ;=============================================================================
-; @(#)xp-digital-io.asm
+; @(#)xp-io-digital-debounce.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
@@ -18,7 +18,7 @@
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/13 - source refactory
 ;              1.0 2014/04/08
-; Description: Simple management of input switches and output leds.
+; Description: Software debounce tecniques for input switches.
 ;=============================================================================
 
     PROCESSOR   16f648a
@@ -260,6 +260,7 @@ mainloop
 switch_1_control ; momentary toggling switch with no debounce
         btfsc       SWITCH, SW1
         goto        switch_2_control
+
         btfsc       LED, LED1
         goto        $+3
         bsf         LED, LED1
@@ -267,11 +268,37 @@ switch_1_control ; momentary toggling switch with no debounce
         bcf         LED, LED1
 
 
-switch_2_control
-switch_3_control
+switch_2_control ; momentary toggling switch with single delay debounce tecnique
+        btfsc       SWITCH, SW2
+        goto        switch_2_reset
+        call        delay1ms
+        btfsc       SWITCH, SW2
+        goto        switch_2_reset
+
+        btfsc       swstatereg, SW2
+        goto        switch_3_control
+        bsf         swstatereg, SW2
+switch_2_action
+        btfsc       LED, LED2
+        goto        $+3
+        bsf         LED, LED2
+        goto        switch_3_control
+        bcf         LED, LED2
+        goto        switch_3_control
+switch_2_reset
+        bcf         swstatereg, SW2
 
 
-switch_4_control ; momentary toggling switch with sampling debounce
+switch_3_control ; momentary switch
+        btfsc       SWITCH, SW3
+        goto        switch_3_up
+        bsf         LED, LED3
+        goto        switch_4_control
+switch_3_up
+        bcf         LED, LED3
+
+
+switch_4_control ; momentary toggling switch with sampling debounce tecnique
         btfsc       swstatereg, SW4         ; last SW stable state is UP?
         goto        sample_sw_up
 

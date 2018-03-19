@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=xp-pic-asm-digital-io.X
+PROJECTNAME=xp-pic-asm-io-digital-debounce.X
 
 # Active Configuration
 DEFAULTCONF=default
