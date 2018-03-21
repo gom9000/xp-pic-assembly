@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-switch.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=xp-pic-asm-switch.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=xp-pic-asm-switch.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-io-digital-array.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=xp-pic-asm-io-digital-array.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=xp-pic-asm-io-digital-array.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/xp-pic-asm-switch.x/bin
+makeDirectory ${TMPDIR}/xp-pic-asm-io-digital-array.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-switch.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-io-digital-array.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-switch.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-io-digital-array.x.tar *
 checkReturnCode
 
 # Cleanup

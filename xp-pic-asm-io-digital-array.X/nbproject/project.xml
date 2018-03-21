@@ -3,8 +3,8 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>xp-pic-asm-switch</name>
-            <creation-uuid>238d03ab-8073-4a62-8eb9-230440cfb15b</creation-uuid>
+            <name>xp-pic-asm-io-digital-array</name>
+            <creation-uuid>0ce726a0-965f-42a2-8867-13bc997475d4</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions/>
             <cpp-extensions/>

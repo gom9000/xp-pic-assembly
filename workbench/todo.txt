@@ -12,7 +12,7 @@ PHASE I
 
 PHASE II
 --------
-- xp-pic-asm-io-digital-array
+
 - xp-pic-asm-io-digital-matrix
 - xp-pic-asm-io-digital-7seg
 - xp-pic-asm-io-digital-lcd

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=xp-pic-asm-switch.X
+PROJECTNAME=xp-pic-asm-io-digital-array.X
 
 # Active Configuration
 DEFAULTCONF=default

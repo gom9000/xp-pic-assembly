@@ -13,8 +13,6 @@ A Library version of the delay routines.
 * [xp-pic-asm-delay-library-test](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-delay-library-test.X/)
 Test code for the delay library.
 
-* [xp-pic-asm-io-digital-debounce](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-io-digital-debounce.X/)
-Simple implementation of software debounce tecniques for input switches.
 
 * [xp-pic-asm-scheduler](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler.X/)
 A simple scheduler manager for executing tasks at regular intervals.
@@ -24,3 +22,10 @@ A library version of the scheduler.
 
 * [xp-pic-asm-scheduler-library-test](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler-library-test.X/)
 Test code for scheduler library.
+
+
+* [xp-pic-asm-io-digital-debounce](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-io-digital-debounce.X/)
+Simple implementation of software debounce tecniques for input switches.
+
+* [xp-pic-asm-io-digital-array](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-io-digital-array.X/)
+Software management of switch and led arrays.
