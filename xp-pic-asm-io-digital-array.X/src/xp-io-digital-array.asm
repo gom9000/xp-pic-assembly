@@ -41,6 +41,7 @@ LED2            equ     0x01
 LED3            equ     0x02
 LED4            equ     0x03
 
+XP_SWA_SIZE     equ     0x04
 XP_SWA_SAMPLES  equ     0x05
 XP_SWA_CLICKED  equ     0x00
 XP_SWA_STATUS   equ     0x07
@@ -57,23 +58,15 @@ XP_SWA_STATUS   equ     0x07
         d1, d2, d3                      ; the delay routine vars
 
         xp_swa_index
-        xp_swa_samples_counter          ; switch-down samples counter
-        xp_swa_samples_counter1
-        xp_swa_samples_counter2
-        xp_swa_samples_counter3
-        xp_swa_samples_counter4
-        XP_SWA_REG                      ; <7> single-click last stable status flag
-                                        ; <0> single-click status change flag
-        xp_swa_reg1
-        xp_swa_reg2
-        xp_swa_reg3
-        xp_swa_reg4
 
-        xp_swa_mask
-        xp_swa_mask1
-        xp_swa_mask2
-        xp_swa_mask3
-        xp_swa_mask4
+        ; switch-pressed samples counter
+        xp_swa_samples_counter: XP_SWA_SIZE
+
+        ; <7> single-click last stable status flag
+        ; <0> single-click status change flag
+        XP_SWA_REG: XP_SWA_SIZE+1
+
+        xp_swa_mask: XP_SWA_SIZE
     endc
 
 
@@ -81,25 +74,25 @@ XP_SWA_STATUS   equ     0x07
 ;  Start of code
 ;=============================================================================
 ;start
-	org			h'0000'				; processor reset vector
-	goto		main				; jump to the main routine
+        org         h'0000'             ; processor reset vector
+        goto        main                ; jump to the main routine
 
-	org			h'0004'				; interrupt vector location
-	movwf		w_temp				; save off current W register contents
-	movf		STATUS, W			; move status register into W register
-	movwf		status_temp			; save off contents of STATUS register
-    movf        PCLATH, W           ; move pclath register into W register
-    movwf       pclath_temp         ; save off contents of PCLATH register
+        org         h'0004'             ; interrupt vector location
+        movwf       w_temp              ; save off current W register contents
+        movf        STATUS, W           ; move status register into W register
+        movwf       status_temp         ; save off contents of STATUS register
+        movf        PCLATH, W           ; move pclath register into W register
+        movwf       pclath_temp         ; save off contents of PCLATH register
 
-    ; isr code can go here or be located as a call subroutine elsewhere
+        ; isr code can go here or be located as a call subroutine elsewhere
 
-    movf        pclath_temp, W      ; retrieve copy of PCLATH register
-    movwf       PCLATH              ; restore pre-isr PCLATH register contents
-    movf		status_temp, W		; retrieve copy of STATUS register
-	movwf		STATUS				; restore pre-isr STATUS register contents
-	swapf		w_temp, F
-	swapf		w_temp, W			; restore pre-isr W register contents
-	retfie							; return from interrupt
+        movf        pclath_temp, W      ; retrieve copy of PCLATH register
+        movwf       PCLATH              ; restore pre-isr PCLATH register contents
+        movf        status_temp, W      ; retrieve copy of STATUS register
+        movwf       STATUS              ; restore pre-isr STATUS register contents
+        swapf       w_temp, F
+        swapf       w_temp, W           ; restore pre-isr W register contents
+        retfie                          ; return from interrupt
 
 
 ;=============================================================================
@@ -110,21 +103,21 @@ init_ports
         errorlevel	-302
 
         ; set PORTA JA1(A0-A3) as Output
-        bcf			STATUS, RP0 			; select Bank0
-        clrf		PORTA					; initialize PORTB by clearing output data latches
+        bcf         STATUS, RP0             ; select Bank0
+        clrf        PORTA                   ; initialize PORTB by clearing output data latches
         movlw       h'07'                   ; turn comparators off
         movwf       CMCON                   ; and set port A mode I/O digital
-        bsf			STATUS, RP0				; select Bank1
-        movlw		b'11100000'				; PORTA input/output
-  		movwf		TRISA
+        bsf         STATUS, RP0             ; select Bank1
+        movlw       b'11100000'             ; PORTA input/output
+  		movwf       TRISA
 
         ; set JB1 (B0-B3) as Input
-        bcf			STATUS, RP0 			; select Bank0
-        clrf		PORTB					; initialize PORTB by clearing output data latches
-        bsf			STATUS, RP0				; select Bank1
-        movlw		b'00001111'				; PORTB input/output
-        movwf		TRISB
-        clrf		STATUS					; select Bank0
+        bcf         STATUS, RP0             ; select Bank0
+        clrf        PORTB                   ; initialize PORTB by clearing output data latches
+        bsf         STATUS, RP0             ; select Bank1
+        movlw       b'00001111'             ; PORTB input/output
+        movwf       TRISB
+        clrf        STATUS                  ; select Bank0
 
         errorlevel  +302
 
@@ -156,38 +149,28 @@ delay1ms_loop
 ;  switch-array management routines
 ;=============================================================================
 xp_swa_init
-        movlw       XP_SWA_SAMPLES
-        movwf       xp_swa_samples_counter
-        movwf       xp_swa_samples_counter1
-        movwf       xp_swa_samples_counter2
-        movwf       xp_swa_samples_counter3
-        movwf       xp_swa_samples_counter4
- 
-        clrf        XP_SWA_REG
-        clrf        xp_swa_reg1
-        clrf        xp_swa_reg2
-        clrf        xp_swa_reg3
-        clrf        xp_swa_reg4
-
-        clrf        xp_swa_mask
         movlw       b'00000001'
-        movwf       xp_swa_mask1
-        movlw       b'00000010'
-        movwf       xp_swa_mask2
-        movlw       b'00000100'
-        movwf       xp_swa_mask3
-        movlw       b'00001000'
-        movwf       xp_swa_mask4
+        movwf       xp_swa_index
+    variable ii=0
+    while ii < XP_SWA_SIZE
+        movlw       XP_SWA_SAMPLES
+        movwf       xp_swa_samples_counter+ii
+        clrf        XP_SWA_REG+ii
+
+        movf        xp_swa_index, W
+        movwf       xp_swa_mask+ii
+        rlf         xp_swa_index, F
+ii+=1
+    endw
+        clrf        xp_swa_index
         return
 
 xp_swa_scan
-        movwf       xp_swa_index
-        incf        xp_swa_index
+        movwf       xp_swa_index                ; get the sw-index value from W
 
-        movf        xp_swa_index, W
-        addlw       XP_SWA_REG
-        movwf       FSR
-        bcf         INDF, XP_SWA_CLICKED
+        addlw       XP_SWA_REG+1                ; add the index to the base address of XP_SWA_REG + 1
+        movwf       FSR                         ; load FSR with base address + offset
+        bcf         INDF, XP_SWA_CLICKED        ; use INDF to point to XP_SWA_REG[index] 
         bcf         XP_SWA_REG, XP_SWA_CLICKED
 
         movf        xp_swa_index, W
@@ -204,7 +187,7 @@ xp_swa_scan
         decfsz      INDF
         return
         movf        xp_swa_index, W
-        addlw       XP_SWA_REG
+        addlw       XP_SWA_REG+1
         movwf       FSR
         btfsc       INDF, XP_SWA_STATUS
         return
@@ -221,7 +204,7 @@ swa_reset
         movwf       INDF
 
         movf        xp_swa_index, W
-        addlw       XP_SWA_REG
+        addlw       XP_SWA_REG+1
         movwf       FSR
         bcf         INDF, XP_SWA_STATUS
         return
