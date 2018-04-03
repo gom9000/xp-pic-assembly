@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC #pic_model# Microcontroller
+; Target.....: Microchip PICmicro #pic_model# Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: #x.y# #release_date# - #whatsnew#
 ;              #x.y# #release_date# - #whatsnew#
@@ -26,28 +26,25 @@
         TITLE       'module_name - Initialize the scheduler'
         SUBTITLE    'Part of the xp-pic-asm-xxx-library'
 
-        INCLUDE     processor.inc
-        INCLUDE     library_name-labels.inc
+;        INCLUDE     library_name-labels.inc
 
         GLOBAL      module_name
-        GLOBAL      SCREG
-        GLOBAL      sc1Counter
+        GLOBAL      vstuff
 
 
 ;=============================================================================
-; Variable declarations
+;  VARIABLE DEFINITIONS
 ;=============================================================================
-GPR_VAR         UDATA
-SCREG           RES         1                   ; scheduler bitflags register
-sc1Counter      RES         1                   ; 2ms counter
+; Unitialized Data Section
+GPR_MODULE_VAR  UDATA
+vstuff          RES     1                       ; variable used for stuff...
 
 
 ;=============================================================================
-; Module
+;  MODULE PROGRAM
 ;=============================================================================
-        CODE                                    ; begin module
+MODULE          CODE                            ; begin module
 module_name
-
-		nop
+        nop
 
         END                                     ; end module

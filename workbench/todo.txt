@@ -1,5 +1,13 @@
 PIC Assembly eXPerience 
 
+PHASE 0
+-------
+
+- xp-pic-asm
+	interrupt
+	indirect
+	macros
+
 PHASE I
 -------
 
@@ -26,13 +34,14 @@ PHASE II
     ritorno di più di un valore da una procedura (tipicamente registro con il dato e registro di stato).
 
 -tebos:
-	- tebo psu5v
-	- tebo psu-distrib
-	- tebo mcu16f6x8
-	- tebo switch/led-array
-	- tebo switch-matrix-4-4
-	- tebo led-matrix-4-4
-	- tebo lcd-16x2
+	- tebo-psu-5
+	- tebo-psu-distrib
+	- tebo-mcu-pic16f6x8
+	- tebo-io-switch-led-array-4
+	- tebo-io-switch-matrix-4x4
+	- tebo-io-led-matrix-4x4
+	- tebo-io-display-7seg
+	- tebo-io-lcd-16x2
 	- tebo analog-input-2
 	- tebo display-7seg
 	- tebo rs232

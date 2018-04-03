@@ -1,0 +1,121 @@
+;******************************************************************
+;*                                                                *
+;*  GetKey, a blocking type subroutine, waits for key press and   *
+;*  returns a character in WREG from the keypad "map" table       *
+;*                                                                *
+        radix   dec
+GetKey
+        DelayMS(16)             ; delay 16 msecs between scans    |B0
+        call    ScanPad         ; scan the keypad                 |B0
+        bz      GetKey          ; a new press? no, branch, else   |B0
+
+        bsf     Beep,4          ; prep for 16 msec beep           |B0
+DoBeep  movf    PORTA,W         ; read port A                     |B0
+        xorlw   1<<Spkr         ; toggle speaker bit              |B0
+        movwf   PORTA           ; toggle speaker pin              |B0
+        DelayCy(Clock/4*1000-6) ; delay 1000 us for 500 Hz tone   |B0
+        decfsz  Beep,F          ; done?  yes, skip, else          |B0
+        goto    DoBeep          ; loop (toggle Spkr pin again)    |B0
+
+        movlw   high(Map-128)   ; table address hi -128           |B0
+        movwf   PCLATH          ;                                 |B0
+        movlw   low(Map-128)    ; table address lo -128           |B0
+        addwf   Keylat,W        ; add key latch (80..8F)          |B0
+        skpnc                   ; carry? no, skip, else           |B0
+        incf    PCLATH,F        ; bump PCLATH                     |B0
+        movwf   PCL             ; return with map table char      |B0
+Map     dt      '0','1','2','3' ; row 0 map                       |B0
+        dt      '4','5','6','7' ; row 1 map                       |B0
+        dt      '8','9','A','B' ; row 2 map                       |B0
+        dt      'C','D','E','F' ; row 3 map                       |B0
+
+
+
+
+;******************************************************************
+;*                                                                *
+;*  ScanPad, 4x4 Keypad              Mike McLaren, K8LH, Nov '07  *
+;*                                                                *
+;*      RB3 RB2 RB1 RB0      <> requires PORTB weak pull-ups      *
+;*  RB4 [0] [1] [2] [3]      <> returns Z=0 for a "new" key only  *
+;*  RB5 [4] [5] [6] [7]      <> returns Z=1 when no keys pressed  *
+;*  RB6 [8] [9] [A] [b]         or if same key is still pressed   *
+;*  RB7 [C] [D] [E] [F]      <> isochronous (77 cycles per call)  *
+;*                                                                *
+;*  the Keylat key state latch contains pressed key value 80..8F  *
+;*  or 0 (no key pressed).  clear Keylat after getting a new key  *
+;*  from ScanPad for "repeat key" operation (see example).        *
+;*                                                                *
+;*  26 words, 77 instruction cycles (isochronous)                 *
+;*                                                                *
+ScanPad
+        movlw   TRISB           ; address of TRISB in bank 1      |B0
+        movwf   FSR             ; setup indirect access           |B0
+        movlw   b'11110111'     ; setup column 0 (RB3) as output  |B0
+        movwf   INDF            ; pseudo "movwf TRISB"            |B0
+        clrf    Column          ; set keypad column offset = 0    |B0
+        movlw   0               ; clear W                         |B0
+        setc                    ; must shift 1 bits into TRISB    |B0
+ScanCol
+        clrf    PORTB           ; set column pin low and Z=1      |B0
+        btfss   PORTB,4         ; row 0 press? no, skip, else     |B0
+        iorlw   0x80            ; indicate key 0, 1, 2, or 3      |B0
+        btfss   PORTB,5         ; row 1 press? no, skip, else     |B0
+        iorlw   0x84            ; indicate key 4, 5, 6, or 7      |B0
+        btfss   PORTB,6         ; row 2 press? no, skip, else     |B0
+        iorlw   0x88            ; indicate key 8, 9, A, or B      |B0
+        btfss   PORTB,7         ; row 3 press? no, skip, else     |B0
+        iorlw   0x8C            ; indicate key C, D, E, or F      |B0
+        skpz                    ; key press? no, skip, else       |B0
+        iorwf   Column,W        ; W = 80,84,88,or 8C + Column     |B0
+NextCol
+        incf    Column,F        ; increment column offset, 0..3   |B0
+        rrf     INDF,F          ; setup TRISB for next column     |B0
+        skpnc                   ; are we done? yes, skip, else    |B0
+        goto    ScanCol         ; scan the next column            |B0
+ScanLat
+        xorwf   Keylat,W        ; same as last key state latch?   |B0
+        skpz                    ; yes, skip with Z=1, else        |B0
+        xorwf   Keylat,F        ; update key state latch          |B0
+        return                  ; Z=0 only for a "new" key press  |B0
+
+;******************************************************************
+
+
+
+
+;
+;  example "repeat key" operation
+;
+SetClock
+        call    GetKey          ; wait for key press
+ChkInc
+        xorlw   '+'             ; the '+' key?
+        bnz     ChkDec          ; no, branch, else
+        call    IncFunc         ; do increment function
+        DelayMS(d'500')         ; wait 500 msecs
+        clrf    Keylat          ; clear latch (allow repeat)
+        goto    SetClock        ; check keypad
+ChkDec
+        xorlw   '-'^'+'         ; the '-' key?
+        bnz     ChkNxt          ; no, branch, else
+        call    DecFunc         ; do decrement function
+        DelayMS(d'500')         ; wait 500 msecs
+        clrf    Keylat          ; clear latch (allow repeat)
+        goto    SetClock        ; check keypad
+ChkNxt
+        xorlw   '>'^'-'         ; the '>' key?
+        bnz     ChkSet          ; no, branch, else
+        call    NxtGrp          ; advance to next digit group
+        goto    SetClock        ; check keypad
+ChkSet
+        xorlw   'S'^'>'         ; the 'S' (Set) key?
+        bnz     SetClock        ; no, branch, else
+Update                          ; update Clock, exit Set mode
+
+
+
+
+
+
+
