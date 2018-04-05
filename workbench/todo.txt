@@ -1,21 +1,15 @@
 PIC Assembly eXPerience 
 
-PHASE 0
--------
+PHASE I+
+--------
 
-- xp-pic-asm
-	interrupt
-	indirect
-	macros
-
-PHASE I
--------
-
-- xp-pic-asm-scheduler-library:
-- xp-pic-asm-scheduler-library-test:
-	Add auto-configuration by processor & OSCFREQ (2.5, 4, 10, 20)
-	Refs: AN964, https://pic-rosa.blogspot.it/2007/09/source-code-for-pic.html
-
+- reworking:
+	- xp-pic-asm-delay-library*
+		layout from templates
+		parametric delay routine
+		macro wrapper for routines cross OSCFREQ
+	- xp-pic-asm-scheduler*
+	- xp-pic-asm-io*
 
 
 PHASE II
@@ -31,7 +25,6 @@ PHASE II
     serial rs232 helo server for drive led on/off/blink
 - xp-pic-asm-usart-library:
     routine for port TX/RX pin settings
-    ritorno di più di un valore da una procedura (tipicamente registro con il dato e registro di stato).
 
 -tebos:
 	- tebo-psu-5
@@ -44,5 +37,4 @@ PHASE II
 	- tebo-io-lcd-16x2
 	- tebo analog-input-2
 	- tebo display-7seg
-	- tebo rs232
-	
+	- tebo rs232	

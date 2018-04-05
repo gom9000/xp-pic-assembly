@@ -34,14 +34,14 @@
 ; 5000000         1s    1.25s     2s      5s
 ;=============================================================================
 
-        EXTERN      DELAY2500
-        EXTERN      DELAY5000
-		EXTERN      DELAY10000
-        EXTERN      DELAY25000
-        EXTERN      DELAY50000
-		EXTERN      DELAY100000
-        EXTERN      DELAY250000
-        EXTERN      DELAY500000
-        EXTERN      DELAY1250000
-        EXTERN      DELAY2500000
-        EXTERN      DELAY5000000
+    EXTERN      DELAY2500
+    EXTERN      DELAY5000
+    EXTERN      DELAY10000
+    EXTERN      DELAY25000
+    EXTERN      DELAY50000
+    EXTERN      DELAY100000
+    EXTERN      DELAY250000
+    EXTERN      DELAY500000
+    EXTERN      DELAY1250000
+    EXTERN      DELAY2500000
+    EXTERN      DELAY5000000

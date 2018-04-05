@@ -43,7 +43,7 @@
 ;=============================================================================
 ;  LABEL EQUATES
 ;=============================================================================
-stuffc          EQU     0x01                    ; assign value 1 to label stuffc 
+stuffc              EQU     0x01                ; assign value 1 to label stuffc 
 
 
 ;=============================================================================
@@ -60,28 +60,28 @@ stuffc          EQU     0x01                    ; assign value 1 to label stuffc
 ;=============================================================================
 ;  RESET VECTOR
 ;=============================================================================
-RESET           ORG     0x0000                  ; processor reset vector
-        goto    MAIN                            ; jump to the main routine
+RESET               ORG     0x0000              ; processor reset vector
+        goto        MAIN                        ; jump to the main routine
 
 
 ;=============================================================================
 ;  INTERRUPT VECTOR
 ;=============================================================================
-INTERRUPT       ORG     0x0004                  ; interrupt vector location
-        movwf   w_temp                          ; save off current W register contents
-        movf    STATUS, W                       ; move status register into W register
-        movwf   status_temp                     ; save off contents of STATUS register
-        movf    PCLATH, W                       ; move pclath register into W register
-        movwf   pclath_temp                     ; save off contents of PCLATH register
+INTERRUPT           ORG     0x0004              ; interrupt vector location
+        movwf       w_temp                      ; save off current W register contents
+        movf        STATUS, W                   ; move status register into W register
+        movwf       status_temp                 ; save off contents of STATUS register
+        movf        PCLATH, W                   ; move pclath register into W register
+        movwf       pclath_temp                 ; save off contents of PCLATH register
 
         ; isr code can go here or be located as a call subroutine elsewhere
 
-        movf    pclath_temp, W                  ; retrieve copy of PCLATH register
-        movwf   PCLATH                          ; restore pre-isr PCLATH register contents
-        movf    status_temp, W                  ; retrieve copy of STATUS register
-        movwf   STATUS                          ; restore pre-isr STATUS register contents
-        swapf   w_temp, F
-        swapf   w_temp, W                       ; restore pre-isr W register contents
+        movf        pclath_temp, W              ; retrieve copy of PCLATH register
+        movwf       PCLATH                      ; restore pre-isr PCLATH register contents
+        movf        status_temp, W              ; retrieve copy of STATUS register
+        movwf       STATUS                      ; restore pre-isr STATUS register contents
+        swapf       w_temp, F
+        swapf       w_temp, W                   ; restore pre-isr W register contents
         retfie                                  ; return from interrupt
 
 

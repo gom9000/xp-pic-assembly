@@ -23,27 +23,28 @@
 ; Description: #module description#
 ;=============================================================================
 
-        TITLE       'module_name - Initialize the scheduler'
-        SUBTITLE    'Part of the xp-pic-asm-xxx-library'
+    TITLE       'module_name - Initialize the scheduler'
+    SUBTITLE    'Part of the xp-pic-asm-xxx-library'
 
-;        INCLUDE     library_name-labels.inc
+;    INCLUDE     library_name-labels.inc
 
-        GLOBAL      module_name
-        GLOBAL      vstuff
+;    EXTERN      extvar
+    GLOBAL      module_name
+    GLOBAL      vstuff
 
 
 ;=============================================================================
 ;  VARIABLE DEFINITIONS
 ;=============================================================================
 ; Unitialized Data Section
-GPR_MODULE_VAR  UDATA
-vstuff          RES     1                       ; variable used for stuff...
+GPR_MODULE_VAR      UDATA
+vstuff              RES     1                   ; variable used for stuff...
 
 
 ;=============================================================================
 ;  MODULE PROGRAM
 ;=============================================================================
-MODULE          CODE                            ; begin module
+MODULE              CODE                        ; begin module
 module_name
         nop
 
