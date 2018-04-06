@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/xp-delay-cycles-2500.asm src/xp-delay-cycles-10000.asm src/xp-delay-cycles-100000.asm src/xp-delay-cycles-1250000.asm src/xp-delay-cycles-25000.asm src/xp-delay-cycles-250000.asm src/xp-delay-cycles-2500000.asm src/xp-delay-cycles-5000.asm src/xp-delay-cycles-50000.asm src/xp-delay-cycles-500000.asm src/xp-delay-cycles-5000000.asm
+SOURCEFILES_QUOTED_IF_SPACED=src/xp-delay-cycles-10000.asm src/xp-delay-cycles-100000.asm src/xp-delay-cycles-1250000.asm src/xp-delay-cycles-2500.asm src/xp-delay-cycles-25000.asm src/xp-delay-cycles-250000.asm src/xp-delay-cycles-2500000.asm src/xp-delay-cycles-4000.asm src/xp-delay-cycles-5000.asm src/xp-delay-cycles-50000.asm src/xp-delay-cycles-500000.asm src/xp-delay-cycles-5000000.asm src/xp-delay-cycles-1000.asm src/xp-delay-cycles-40000.asm src/xp-delay-cycles-400000.asm
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/xp-delay-cycles-2500.o ${OBJECTDIR}/src/xp-delay-cycles-10000.o ${OBJECTDIR}/src/xp-delay-cycles-100000.o ${OBJECTDIR}/src/xp-delay-cycles-1250000.o ${OBJECTDIR}/src/xp-delay-cycles-25000.o ${OBJECTDIR}/src/xp-delay-cycles-250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000.o ${OBJECTDIR}/src/xp-delay-cycles-50000.o ${OBJECTDIR}/src/xp-delay-cycles-500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000000.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/xp-delay-cycles-2500.o.d ${OBJECTDIR}/src/xp-delay-cycles-10000.o.d ${OBJECTDIR}/src/xp-delay-cycles-100000.o.d ${OBJECTDIR}/src/xp-delay-cycles-1250000.o.d ${OBJECTDIR}/src/xp-delay-cycles-25000.o.d ${OBJECTDIR}/src/xp-delay-cycles-250000.o.d ${OBJECTDIR}/src/xp-delay-cycles-2500000.o.d ${OBJECTDIR}/src/xp-delay-cycles-5000.o.d ${OBJECTDIR}/src/xp-delay-cycles-50000.o.d ${OBJECTDIR}/src/xp-delay-cycles-500000.o.d ${OBJECTDIR}/src/xp-delay-cycles-5000000.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/xp-delay-cycles-10000.o ${OBJECTDIR}/src/xp-delay-cycles-100000.o ${OBJECTDIR}/src/xp-delay-cycles-1250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500.o ${OBJECTDIR}/src/xp-delay-cycles-25000.o ${OBJECTDIR}/src/xp-delay-cycles-250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500000.o ${OBJECTDIR}/src/xp-delay-cycles-4000.o ${OBJECTDIR}/src/xp-delay-cycles-5000.o ${OBJECTDIR}/src/xp-delay-cycles-50000.o ${OBJECTDIR}/src/xp-delay-cycles-500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000000.o ${OBJECTDIR}/src/xp-delay-cycles-1000.o ${OBJECTDIR}/src/xp-delay-cycles-40000.o ${OBJECTDIR}/src/xp-delay-cycles-400000.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/xp-delay-cycles-10000.o.d ${OBJECTDIR}/src/xp-delay-cycles-100000.o.d ${OBJECTDIR}/src/xp-delay-cycles-1250000.o.d ${OBJECTDIR}/src/xp-delay-cycles-2500.o.d ${OBJECTDIR}/src/xp-delay-cycles-25000.o.d ${OBJECTDIR}/src/xp-delay-cycles-250000.o.d ${OBJECTDIR}/src/xp-delay-cycles-2500000.o.d ${OBJECTDIR}/src/xp-delay-cycles-4000.o.d ${OBJECTDIR}/src/xp-delay-cycles-5000.o.d ${OBJECTDIR}/src/xp-delay-cycles-50000.o.d ${OBJECTDIR}/src/xp-delay-cycles-500000.o.d ${OBJECTDIR}/src/xp-delay-cycles-5000000.o.d ${OBJECTDIR}/src/xp-delay-cycles-1000.o.d ${OBJECTDIR}/src/xp-delay-cycles-40000.o.d ${OBJECTDIR}/src/xp-delay-cycles-400000.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/xp-delay-cycles-2500.o ${OBJECTDIR}/src/xp-delay-cycles-10000.o ${OBJECTDIR}/src/xp-delay-cycles-100000.o ${OBJECTDIR}/src/xp-delay-cycles-1250000.o ${OBJECTDIR}/src/xp-delay-cycles-25000.o ${OBJECTDIR}/src/xp-delay-cycles-250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000.o ${OBJECTDIR}/src/xp-delay-cycles-50000.o ${OBJECTDIR}/src/xp-delay-cycles-500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000000.o
+OBJECTFILES=${OBJECTDIR}/src/xp-delay-cycles-10000.o ${OBJECTDIR}/src/xp-delay-cycles-100000.o ${OBJECTDIR}/src/xp-delay-cycles-1250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500.o ${OBJECTDIR}/src/xp-delay-cycles-25000.o ${OBJECTDIR}/src/xp-delay-cycles-250000.o ${OBJECTDIR}/src/xp-delay-cycles-2500000.o ${OBJECTDIR}/src/xp-delay-cycles-4000.o ${OBJECTDIR}/src/xp-delay-cycles-5000.o ${OBJECTDIR}/src/xp-delay-cycles-50000.o ${OBJECTDIR}/src/xp-delay-cycles-500000.o ${OBJECTDIR}/src/xp-delay-cycles-5000000.o ${OBJECTDIR}/src/xp-delay-cycles-1000.o ${OBJECTDIR}/src/xp-delay-cycles-40000.o ${OBJECTDIR}/src/xp-delay-cycles-400000.o
 
 # Source Files
-SOURCEFILES=src/xp-delay-cycles-2500.asm src/xp-delay-cycles-10000.asm src/xp-delay-cycles-100000.asm src/xp-delay-cycles-1250000.asm src/xp-delay-cycles-25000.asm src/xp-delay-cycles-250000.asm src/xp-delay-cycles-2500000.asm src/xp-delay-cycles-5000.asm src/xp-delay-cycles-50000.asm src/xp-delay-cycles-500000.asm src/xp-delay-cycles-5000000.asm
+SOURCEFILES=src/xp-delay-cycles-10000.asm src/xp-delay-cycles-100000.asm src/xp-delay-cycles-1250000.asm src/xp-delay-cycles-2500.asm src/xp-delay-cycles-25000.asm src/xp-delay-cycles-250000.asm src/xp-delay-cycles-2500000.asm src/xp-delay-cycles-4000.asm src/xp-delay-cycles-5000.asm src/xp-delay-cycles-50000.asm src/xp-delay-cycles-500000.asm src/xp-delay-cycles-5000000.asm src/xp-delay-cycles-1000.asm src/xp-delay-cycles-40000.asm src/xp-delay-cycles-400000.asm
 
 
 CFLAGS=
@@ -94,14 +94,6 @@ MP_LINKER_DEBUG_OPTION=-r=ROM@0xF00:0xFFF -r=RAM@SHARE:0x70:0x70 -r=RAM@SHARE:0x
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/src/xp-delay-cycles-2500.o: src/xp-delay-cycles-2500.asm  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o.d 
-	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500.o\" \"src/xp-delay-cycles-2500.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
-	
 ${OBJECTDIR}/src/xp-delay-cycles-10000.o: src/xp-delay-cycles-10000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-10000.o.d 
@@ -126,6 +118,14 @@ ${OBJECTDIR}/src/xp-delay-cycles-1250000.o: src/xp-delay-cycles-1250000.asm  nbp
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-1250000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-1250000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/src/xp-delay-cycles-2500.o: src/xp-delay-cycles-2500.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500.o\" \"src/xp-delay-cycles-2500.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 ${OBJECTDIR}/src/xp-delay-cycles-25000.o: src/xp-delay-cycles-25000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-25000.o.d 
@@ -149,6 +149,14 @@ ${OBJECTDIR}/src/xp-delay-cycles-2500000.o: src/xp-delay-cycles-2500000.asm  nbp
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500000.o\" \"src/xp-delay-cycles-2500000.asm\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-4000.o: src/xp-delay-cycles-4000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-4000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-4000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-4000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-4000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-4000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-4000.o\" \"src/xp-delay-cycles-4000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-4000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-4000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 ${OBJECTDIR}/src/xp-delay-cycles-5000.o: src/xp-delay-cycles-5000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
@@ -182,15 +190,31 @@ ${OBJECTDIR}/src/xp-delay-cycles-5000000.o: src/xp-delay-cycles-5000000.asm  nbp
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-5000000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-5000000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
-else
-${OBJECTDIR}/src/xp-delay-cycles-2500.o: src/xp-delay-cycles-2500.asm  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/src/xp-delay-cycles-1000.o: src/xp-delay-cycles-1000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
-	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o.d 
-	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o 
-	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500.o\" \"src/xp-delay-cycles-2500.asm\" 
-	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500.o"
-	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-1000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-1000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-1000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-1000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-1000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-1000.o\" \"src/xp-delay-cycles-1000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-1000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-1000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/src/xp-delay-cycles-40000.o: src/xp-delay-cycles-40000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-40000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-40000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-40000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-40000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-40000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-40000.o\" \"src/xp-delay-cycles-40000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-40000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-40000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-400000.o: src/xp-delay-cycles-400000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-400000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-400000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-400000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PICKIT2=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-400000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-400000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-400000.o\" \"src/xp-delay-cycles-400000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-400000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-400000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+else
 ${OBJECTDIR}/src/xp-delay-cycles-10000.o: src/xp-delay-cycles-10000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-10000.o.d 
@@ -215,6 +239,14 @@ ${OBJECTDIR}/src/xp-delay-cycles-1250000.o: src/xp-delay-cycles-1250000.asm  nbp
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-1250000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-1250000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/src/xp-delay-cycles-2500.o: src/xp-delay-cycles-2500.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-2500.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500.o\" \"src/xp-delay-cycles-2500.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 ${OBJECTDIR}/src/xp-delay-cycles-25000.o: src/xp-delay-cycles-25000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
 	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-25000.o.d 
@@ -238,6 +270,14 @@ ${OBJECTDIR}/src/xp-delay-cycles-2500000.o: src/xp-delay-cycles-2500000.asm  nbp
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-2500000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-2500000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-2500000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-2500000.o\" \"src/xp-delay-cycles-2500000.asm\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-2500000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-2500000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-4000.o: src/xp-delay-cycles-4000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-4000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-4000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-4000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-4000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-4000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-4000.o\" \"src/xp-delay-cycles-4000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-4000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-4000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 ${OBJECTDIR}/src/xp-delay-cycles-5000.o: src/xp-delay-cycles-5000.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
@@ -270,6 +310,30 @@ ${OBJECTDIR}/src/xp-delay-cycles-5000000.o: src/xp-delay-cycles-5000000.asm  nbp
 	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-5000000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-5000000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-5000000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-5000000.o\" \"src/xp-delay-cycles-5000000.asm\" 
 	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-5000000.o"
 	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-5000000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-1000.o: src/xp-delay-cycles-1000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-1000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-1000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-1000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-1000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-1000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-1000.o\" \"src/xp-delay-cycles-1000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-1000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-1000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-40000.o: src/xp-delay-cycles-40000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-40000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-40000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-40000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-40000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-40000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-40000.o\" \"src/xp-delay-cycles-40000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-40000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-40000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/src/xp-delay-cycles-400000.o: src/xp-delay-cycles-400000.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-400000.o.d 
+	@${RM} ${OBJECTDIR}/src/xp-delay-cycles-400000.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/src/xp-delay-cycles-400000.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/src/xp-delay-cycles-400000.lst\" -e\"${OBJECTDIR}/src/xp-delay-cycles-400000.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/src/xp-delay-cycles-400000.o\" \"src/xp-delay-cycles-400000.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/src/xp-delay-cycles-400000.o"
+	@${FIXDEPS} "${OBJECTDIR}/src/xp-delay-cycles-400000.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
 endif
 

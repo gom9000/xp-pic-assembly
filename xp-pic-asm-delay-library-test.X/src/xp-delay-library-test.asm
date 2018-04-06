@@ -44,8 +44,14 @@ RESET               CODE    0x0000              ; processor reset vector
 ;=============================================================================
 MAINPROGRAM         CODE                        ; begin program
 MAIN
+        banksel     xpDelay1000
+        call        xpDelay1000
+
         banksel     xpDelay2500
         call        xpDelay2500
+
+        banksel     xpDelay4000
+        call        xpDelay4000
 
         banksel     xpDelay5000
         call        xpDelay5000
@@ -56,6 +62,9 @@ MAIN
         banksel     xpDelay25000
         call        xpDelay25000
 
+        banksel     xpDelay40000
+        call        xpDelay40000
+
         banksel     xpDelay50000
         call        xpDelay50000
 
@@ -64,6 +73,9 @@ MAIN
 
         banksel     xpDelay250000
         call        xpDelay250000
+
+        banksel     xpDelay400000
+        call        xpDelay400000
 
         banksel     xpDelay500000
         call        xpDelay500000

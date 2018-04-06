@@ -4,10 +4,6 @@ PHASE I+
 --------
 
 - reworking:
-	- xp-pic-asm-delay-library*
-		layout from templates
-		parametric delay routine
-		macro wrapper for routines cross OSCFREQ
 	- xp-pic-asm-scheduler*
 	- xp-pic-asm-io*
 

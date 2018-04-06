@@ -12,18 +12,22 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>src/delay10000.asm</itemPath>
-      <itemPath>src/delay100000.asm</itemPath>
-      <itemPath>src/delay1250000.asm</itemPath>
-      <itemPath>src/delay25000.asm</itemPath>
-      <itemPath>src/delay250000.asm</itemPath>
-      <itemPath>src/delay2500000.asm</itemPath>
-      <itemPath>src/delay5000.asm</itemPath>
-      <itemPath>src/delay50000.asm</itemPath>
-      <itemPath>src/delay500000.asm</itemPath>
-      <itemPath>src/delay5000000.asm</itemPath>
-      <itemPath>src/xp-delay-library.inc</itemPath>
-      <itemPath>src/delay2500.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-10000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-100000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-1250000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-2500.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-25000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-250000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-2500000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-4000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-5000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-50000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-500000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-5000000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-library.inc</itemPath>
+      <itemPath>src/xp-delay-cycles-1000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-40000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-400000.asm</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
