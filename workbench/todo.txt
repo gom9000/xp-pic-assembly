@@ -4,7 +4,6 @@ PHASE I+
 --------
 
 - reworking:
-	- xp-pic-asm-scheduler*
 	- xp-pic-asm-io*
 
 

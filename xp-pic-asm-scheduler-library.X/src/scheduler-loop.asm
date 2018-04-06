@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16Fxxx Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
@@ -23,39 +23,39 @@
 ; Description: Execute the scheduler main loop
 ;=============================================================================
 
-        TITLE       'SCHEDULERloop - The scheduler main loop'
-        SUBTITLE    'Part of the xp-pic-asm-scheduler-library'
+    TITLE       'SCHEDULERloop - The scheduler main loop'
+    SUBTITLE    'Part of the xp-pic-asm-scheduler-library'
 
+    INCLUDE     processor.inc
+    INCLUDE     scheduler-labels.inc
 
-        INCLUDE     processor.inc
-        INCLUDE     scheduler-labels.inc
+    GLOBAL      SCHEDULERloop
 
-
-        GLOBAL      SCHEDULERloop
-        EXTERN      task_2ms_action
-        EXTERN      task_10ms_action
-        EXTERN      task_50ms_action
-        EXTERN      task_100ms_action
-        EXTERN      task_250ms_action
-        EXTERN      task_500ms_action
-        EXTERN      task_1s_action
-        EXTERN      task_2s_action
-        EXTERN      SCREG
-        EXTERN      sc1Counter
-        EXTERN      sc2Counter
-        EXTERN      sc3Counter
-        EXTERN      sc4Counter
-        EXTERN      sc5Counter
-        EXTERN      sc6Counter
-        EXTERN      sc7Counter
-        EXTERN      sc8Counter
+    EXTERN      task_2ms_action
+    EXTERN      task_10ms_action
+    EXTERN      task_50ms_action
+    EXTERN      task_100ms_action
+    EXTERN      task_250ms_action
+    EXTERN      task_500ms_action
+    EXTERN      task_1s_action
+    EXTERN      task_2s_action
+    EXTERN      SCREG
+    EXTERN      sc1Counter
+    EXTERN      sc2Counter
+    EXTERN      sc3Counter
+    EXTERN      sc4Counter
+    EXTERN      sc5Counter
+    EXTERN      sc6Counter
+    EXTERN      sc7Counter
+    EXTERN      sc8Counter
 
 
 ;=============================================================================
-; Module
+;  MODULE PROGRAM
 ;=============================================================================
-        CODE                                    ; begin module
+XP_SCHEDULER_LOOP   CODE                        ; begin module
 SCHEDULERloop
+        clrf        STATUS                      ; select Bank0
 
 mainloop
         btfss       INTCON, T0IF                ; timer overflow?
@@ -66,14 +66,15 @@ mainloop
         movwf       TMR0                        ; 250*8 cycles (400uS on 20MHz FOSC)
                                                 ; (256 - 250 + 3)
 
-
 ; --  manage sc1-period tasks ------------------------------------------------
 begin_sc1tasks
         btfss       SCREG, SC1OF                ; SC1 timer overflow?
         goto        end_sc1tasks                ; not time yet
         nop
         nop
+        pagesel     task_2ms_action
         call        task_2ms_action             ; yes, execute tasks
+        pagesel     $
 end_sc1tasks
 ; ----------------------------------------------------------------------------
 
@@ -84,7 +85,9 @@ begin_sc2tasks
         goto        end_sc2tasks                ; not time yet
         nop
         nop
+        pagesel     task_10ms_action
         call        task_10ms_action            ; yes, execute tasks
+        pagesel     $
 end_sc2tasks
 ; ----------------------------------------------------------------------------
 
@@ -95,7 +98,9 @@ begin_sc3tasks
         goto        end_sc3tasks                ; not time yet
         nop
         nop
+        pagesel     task_50ms_action
         call        task_50ms_action            ; yes, execute tasks
+        pagesel     $
 end_sc3tasks
 ; ----------------------------------------------------------------------------
 
@@ -106,7 +111,9 @@ begin_sc4tasks
         goto        end_sc4tasks                ; not time yet
         nop
         nop
+        pagesel     task_100ms_action
         call        task_100ms_action           ; yes, execute tasks
+        pagesel     $
 end_sc4tasks
 ; ----------------------------------------------------------------------------
 
@@ -117,7 +124,9 @@ begin_sc5tasks
         goto        end_sc5tasks                ; not time yet
         nop
         nop
+        pagesel     task_250ms_action
         call        task_250ms_action           ; yes, execute tasks
+        pagesel     $
 end_sc5tasks
 ; ----------------------------------------------------------------------------
 
@@ -128,7 +137,9 @@ begin_sc6tasks
         goto        end_sc6tasks                ; not time yet
         nop
         nop
+        pagesel     task_500ms_action
         call        task_500ms_action           ; yes, execute tasks
+        pagesel     $
 end_sc6tasks
 ; ----------------------------------------------------------------------------
 
@@ -139,7 +150,9 @@ begin_sc7tasks
         goto        end_sc7tasks                ; not time yet
         nop
         nop
+        pagesel     task_1s_action
         call        task_1s_action              ; yes, execute tasks
+        pagesel     $
 end_sc7tasks
 ; ----------------------------------------------------------------------------
 
@@ -150,7 +163,9 @@ begin_sc8tasks
         goto        end_sc8tasks                ; not time yet
         nop
         nop
+        pagesel     task_2s_action
         call        task_2s_action              ; yes, execute tasks
+        pagesel     $
 end_sc8tasks
 ; ----------------------------------------------------------------------------
 

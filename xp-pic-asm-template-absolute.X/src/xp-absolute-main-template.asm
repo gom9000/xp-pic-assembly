@@ -61,6 +61,7 @@ stuffc              EQU     0x01                ; assign value 1 to label stuffc
 ;  RESET VECTOR
 ;=============================================================================
 RESET               ORG     0x0000              ; processor reset vector
+        pagesel     MAIN
         goto        MAIN                        ; jump to the main routine
 
 

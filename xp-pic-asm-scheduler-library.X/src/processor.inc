@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16Fxxx Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20

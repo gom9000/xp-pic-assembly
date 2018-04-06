@@ -6,7 +6,7 @@
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2018 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,90 +14,74 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16F648A Microcontroller
+; Target.....: Microchip PICmicro 16F648A Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/03/21
 ; Description: 
 ;    Simple scheduler manager for executing tasks at regular intervals
+;    using timer0
 ;=============================================================================
 
     PROCESSOR   16f648a
-    __CONFIG    _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _HS_OSC
     INCLUDE     <p16f648a.inc>
 
 
 ;=============================================================================
-;  Label equates
+;  CONFIGURATION
+;=============================================================================
+    __CONFIG    _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _HS_OSC
+
+
+;=============================================================================
+;  LABEL EQUATES
 ;=============================================================================
 
 ;----- SCREG overflow bitflags -----------------------------------------------
-SC1OF           equ     0x00        ; SCREG<0>
-SC2OF           equ     0x01        ; SCREG<1>
-SC3OF           equ     0x02        ; SCREG<2>
-SC4OF           equ     0x03        ; SCREG<3>
-SC5OF           equ     0x04        ; SCREG<4>
-SC6OF           equ     0x05        ; SCREG<5>
-SC7OF           equ     0x06        ; SCREG<6>
-SC8OF           equ     0x07        ; SCREG<7>
+SC1OF               EQU     0x00                ; SCREG<0>
+SC2OF               EQU     0x01                ; SCREG<1>
+SC3OF               EQU     0x02                ; SCREG<2>
+SC4OF               EQU     0x03                ; SCREG<3>
+SC5OF               EQU     0x04                ; SCREG<4>
+SC6OF               EQU     0x05                ; SCREG<5>
+SC7OF               EQU     0x06                ; SCREG<6>
+SC8OF               EQU     0x07                ; SCREG<7>
 
 
 ;----- counters init cycles --------------------------------------------------
 ; on 20MHz FOSC : 2ms, 10ms, 50ms, 100ms, 250ms, 500ms, 1s, 2s
-SC1CYCLES       equ     d'5'        ; 5 x timer0 cycles =   10000
-SC2CYCLES       equ     d'5'        ; 5 x SC1 cycles    =   50000
-SC3CYCLES       equ     d'5'        ; 5 x SC2 cycles    =  250000
-SC4CYCLES       equ     d'2'        ; 2 x SC3 cycles    =  500000
-SC5CYCLES       equ     d'5'        ; 5 x SC3 cycles    = 1250000
-SC6CYCLES       equ     d'2'        ; 2 x SC5 cycles    = 2500000
-SC7CYCLES       equ     d'2'        ; 2 x SC6 cycles    = 5000000
-SC8CYCLES       equ     d'2'        ; 2 x SC7 cycles    =10000000
+SC1CYCLES           EQU     d'5'                ; 5 x timer0 cycles =   10000
+SC2CYCLES           EQU     d'5'                ; 5 x SC1 cycles    =   50000
+SC3CYCLES           EQU     d'5'                ; 5 x SC2 cycles    =  250000
+SC4CYCLES           EQU     d'2'                ; 2 x SC3 cycles    =  500000
+SC5CYCLES           EQU     d'5'                ; 5 x SC3 cycles    = 1250000
+SC6CYCLES           EQU     d'2'                ; 2 x SC5 cycles    = 2500000
+SC7CYCLES           EQU     d'2'                ; 2 x SC6 cycles    = 5000000
+SC8CYCLES           EQU     d'2'                ; 2 x SC7 cycles    =10000000
 
 
 ;=============================================================================
-;  File register use
+;  FILE REGISTER USE
 ;=============================================================================
-	cblock		h'20'
-		w_temp						; variable used for context saving
-		status_temp					; variable used for context saving
-        pclath_temp                 ; variable used for context saving
-
-        SCREG                       ; scheduler bitflags register
-
-        sc1Counter                  ; 2ms counter
-        sc2Counter                  ; 10ms counter
-        sc3Counter                  ; 50ms counter
-        sc4Counter                  ; 100ms counter
-        sc5Counter                  ; 250ms counter
-        sc6Counter                  ; 500ms counter
-        sc7Counter                  ; 1s counter
-        sc8Counter                  ; 2s counter
-	endc
+    CBLOCK	0x020
+        SCREG                                   ; scheduler bitflags register
+        sc1Counter                              ; 2ms counter
+        sc2Counter                              ; 10ms counter
+        sc3Counter                              ; 50ms counter
+        sc4Counter                              ; 100ms counter
+        sc5Counter                              ; 250ms counter
+        sc6Counter                              ; 500ms counter
+        sc7Counter                              ; 1s counter
+        sc8Counter                              ; 2s counter
+	ENDC
 
 
 ;=============================================================================
-;  Start of code
+;  RESET VECTOR
 ;=============================================================================
-;start
-	org			h'0000'				; processor reset vector
-	goto		main				; jump to the main routine
-
-	org			h'0004'				; interrupt vector location
-	movwf		w_temp				; save off current W register contents
-	movf		STATUS, W			; move status register into W register
-	movwf		status_temp			; save off contents of STATUS register
-    movf        PCLATH, W           ; move pclath register into W register
-    movwf       pclath_temp         ; save off contents of PCLATH register
-
-    ; isr code can go here or be located as a call subroutine elsewhere
-
-    movf        pclath_temp, W      ; retrieve copy of PCLATH register
-    movwf       PCLATH              ; restore pre-isr PCLATH register contents
-    movf		status_temp, W		; retrieve copy of STATUS register
-	movwf		STATUS				; restore pre-isr STATUS register contents
-	swapf		w_temp, F
-	swapf		w_temp, W			; restore pre-isr W register contents
-	retfie							; return from interrupt
+RESET               ORG     0x0000              ; processor reset vector
+        pagesel     MAIN
+        goto        MAIN                        ; jump to the main routine
 
 
 ;=============================================================================
@@ -149,14 +133,9 @@ init_scheduler
 
 
 ;=============================================================================
-;  Task Routines
+;  MAIN PROGRAM
 ;=============================================================================
-
-
-;=============================================================================
-;  Main Program
-;=============================================================================
-main
+MAIN                                            ; begin program
         call        init_timer0
         call        init_scheduler
 

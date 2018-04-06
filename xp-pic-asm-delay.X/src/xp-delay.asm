@@ -117,8 +117,9 @@ delayMS         MACRO   ms
 ;=============================================================================
 ;  RESET VECTOR
 ;=============================================================================
-RESET           ORG     0x0000                  ; processor reset vector
-        goto    MAIN                            ; jump to the main routine
+RESET               ORG     0x0000              ; processor reset vector
+        pagesel     MAIN
+        goto        MAIN                        ; jump to the main routine
 
 
 ;=============================================================================

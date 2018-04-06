@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16F6x8A Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
@@ -23,46 +23,44 @@
 ; Description: Initialize the SCHEDULER
 ;=============================================================================
 
-        TITLE       'SCHEDULERinit - Initialize the scheduler'
-        SUBTITLE    'Part of the xp-pic-asm-scheduler-library'
+    TITLE       'SCHEDULERinit - Initialize the scheduler'
+    SUBTITLE    'Part of the xp-pic-asm-scheduler-library'
 
+    INCLUDE     processor.inc
+    INCLUDE     scheduler-labels.inc
 
-        INCLUDE     processor.inc
-        INCLUDE     scheduler-labels.inc
-
-
-        GLOBAL      SCHEDULERinit
-        GLOBAL      SCREG
-        GLOBAL      sc1Counter
-        GLOBAL      sc2Counter
-        GLOBAL      sc3Counter
-        GLOBAL      sc4Counter
-        GLOBAL      sc5Counter
-        GLOBAL      sc6Counter
-        GLOBAL      sc7Counter
-        GLOBAL      sc8Counter
-
-
-;=============================================================================
-; Variable declarations
-;=============================================================================
-GPR_VAR         UDATA
-SCREG           RES         1                   ; scheduler bitflags register
-
-sc1Counter      RES         1                   ; 2ms counter
-sc2Counter      RES         1                   ; 10ms counter
-sc3Counter      RES         1                   ; 50ms counter
-sc4Counter      RES         1                   ; 100ms counter
-sc5Counter      RES         1                   ; 250ms counter
-sc6Counter      RES         1                   ; 500ms counter
-sc7Counter      RES         1                   ; 1s counter
-sc8Counter      RES         1                   ; 2s counter
+    GLOBAL      SCHEDULERinit
+    GLOBAL      SCREG
+    GLOBAL      sc1Counter
+    GLOBAL      sc2Counter
+    GLOBAL      sc3Counter
+    GLOBAL      sc4Counter
+    GLOBAL      sc5Counter
+    GLOBAL      sc6Counter
+    GLOBAL      sc7Counter
+    GLOBAL      sc8Counter
 
 
 ;=============================================================================
-; Module
+;  VARIABLE DEFINITIONS
 ;=============================================================================
-        CODE                                    ; begin module
+; Shared Uninitialized Data Section
+XP_SCHEDULER_VAR    UDATA_SHR
+SCREG               RES     1                   ; scheduler bitflags register
+sc1Counter          RES     1                   ; 2ms counter
+sc2Counter          RES     1                   ; 10ms counter
+sc3Counter          RES     1                   ; 50ms counter
+sc4Counter          RES     1                   ; 100ms counter
+sc5Counter          RES     1                   ; 250ms counter
+sc6Counter          RES     1                   ; 500ms counter
+sc7Counter          RES     1                   ; 1s counter
+sc8Counter          RES     1                   ; 2s counter
+
+
+;=============================================================================
+;  MODULE PROGRAM
+;=============================================================================
+XP_SCHEDULER_INIT   CODE                        ; begin module
 SCHEDULERinit
 
 timer0_init
