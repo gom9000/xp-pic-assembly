@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>xp-pic-asm-delay-library</name>
+            <name>xp-pic-asm-delay-cycles-library</name>
             <creation-uuid>a12f65a7-8203-4534-9e12-5b9c679f315d</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions/>

@@ -1,12 +1,12 @@
 ;=============================================================================
-; @(#)delay5000000.asm
+; @(#)xp-delay-cycles-2500.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2018 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,47 +14,43 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16Fxxx Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.0 2018/03/09
 ;
-; Module.....: DELAY5000000
-; Description: 5000000 cycles delay routine
+; Module.....: xpDelay2500
+; Description: 2500 cycles delay routine
 ;=============================================================================
 
-        TITLE       'DELAY5000000 - 5000000 cycles delay'
-        SUBTITLE    'Part of the xp-delay-library'
+    TITLE       'xpDelay2500 - 2500 cycles delay'
+    SUBTITLE    'Part of the xp-delay-cycles-library'
 
-        GLOBAL      DELAY5000000
-
-
-;=============================================================================
-; Variable declarations
-;=============================================================================
-GPR_VAR         UDATA
-localvar1       RES         1
-localvar2       RES         1
-localvar3       RES         1
+    GLOBAL      xpDelay2500
 
 
 ;=============================================================================
-; Module
+;  VARIABLE DEFINITIONS
 ;=============================================================================
-        CODE                                    ; begin module
-DELAY5000000
-        movlw       0x2C                        ; 4999993 cycles
+; Unitialized Data Section
+GPR_MODULE_VAR      UDATA
+localvar1           RES     1
+localvar2           RES     1
+
+
+;=============================================================================
+;  MODULE PROGRAM
+;=============================================================================
+MODULE              CODE                        ; begin module
+xpDelay2500
+        movlw       0xF2                        ; 2493 cycles
         movwf       localvar1
-        movlw       0xE7
+        movlw       0x02
         movwf       localvar2
-        movlw       0x0B
-        movwf       localvar3
-delay5000000_loop
+inner_loop
         decfsz      localvar1, F
         goto        $+2
         decfsz      localvar2, F
-        goto        $+2
-        decfsz      localvar3, F
-        goto        delay5000000_loop
+        goto        inner_loop 
         goto        $+1                         ; 3 cycles
         nop
 

@@ -116,24 +116,22 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  ../xp-pic-asm-delay-library.X/dist/default/debug/xp-pic-asm-delay-library.X.lib  
+dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  ../xp-pic-asm-delay-cycles-library.X/dist/default/production/xp-pic-asm-delay-cycles-library.X.lib  
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_SIMULATOR=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}   ..\xp-pic-asm-delay-library.X\dist\default\debug\xp-pic-asm-delay-library.X.lib  
+	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_SIMULATOR=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}   ..\xp-pic-asm-delay-cycles-library.X\dist\default\production\xp-pic-asm-delay-cycles-library.X.lib  
 else
-dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  ../xp-pic-asm-delay-library.X/dist/default/production/xp-pic-asm-delay-library.X.lib 
+dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk  ../xp-pic-asm-delay-cycles-library.X/dist/default/production/xp-pic-asm-delay-cycles-library.X.lib 
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w  -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}   ..\xp-pic-asm-delay-library.X\dist\default\production\xp-pic-asm-delay-library.X.lib  
+	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w  -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library-test.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}   ..\xp-pic-asm-delay-cycles-library.X\dist\default\production\xp-pic-asm-delay-cycles-library.X.lib  
 endif
 
 
 # Subprojects
 .build-subprojects:
-	cd /D ../xp-pic-asm-delay-library.X && ${MAKE}  -f Makefile CONF=default
 
 
 # Subprojects
 .clean-subprojects:
-	cd /D ../xp-pic-asm-delay-library.X && rm -rf "build/default" "dist/default"
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}

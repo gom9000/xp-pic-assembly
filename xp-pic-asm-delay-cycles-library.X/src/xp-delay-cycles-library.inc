@@ -1,12 +1,12 @@
 ;=============================================================================
-; @(#)xp-delay-library.inc
+; @(#)xp-delay-cycles-library.inc
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2018 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,11 +14,11 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16Fxxx Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.0 2018/03/09
 ; Description:
-;  Include file for the xp-delay library:
+;  Include file for the xp-delay-cycles library:
 ;
 ;  cycles        20MHz   16MHz   10MHz   4MHz
 ;    2500       500us    625us    1ms   2.5ms
@@ -34,14 +34,14 @@
 ; 5000000         1s    1.25s     2s      5s
 ;=============================================================================
 
-    EXTERN      DELAY2500
-    EXTERN      DELAY5000
-    EXTERN      DELAY10000
-    EXTERN      DELAY25000
-    EXTERN      DELAY50000
-    EXTERN      DELAY100000
-    EXTERN      DELAY250000
-    EXTERN      DELAY500000
-    EXTERN      DELAY1250000
-    EXTERN      DELAY2500000
-    EXTERN      DELAY5000000
+    EXTERN      xpDelay2500
+    EXTERN      xpDelay5000
+    EXTERN      xpDelay10000
+    EXTERN      xpDelay25000
+    EXTERN      xpDelay50000
+    EXTERN      xpDelay100000
+    EXTERN      xpDelay250000
+    EXTERN      xpDelay500000
+    EXTERN      xpDelay1250000
+    EXTERN      xpDelay2500000
+    EXTERN      xpDelay5000000

@@ -1,12 +1,12 @@
 ;=============================================================================
-; @(#)delay50000.asm
+; @(#)xp-delay-cycles-50000.asm
 ;                       ________.________
 ;   ____   ____  ______/   __   \   ____/
 ;  / ___\ /  _ \/  ___/\____    /____  \ 
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2018 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,33 +14,34 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16Fxxx Microcontroller
+; Target.....: Microchip Mid-Range PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.0 2018/03/09
 ;
-; Module.....: DELAY50000
+; Module.....: xpDelay50000
 ; Description: 50000 cycles delay routine
 ;=============================================================================
 
-        TITLE       'DELAY50000 - 50000 cycles delay'
-        SUBTITLE    'Part of the xp-delay-library'
+    TITLE       'xpDelay50000 - 50000 cycles delay'
+    SUBTITLE    'Part of the xp-delay-cycles-library'
 
-        GLOBAL      DELAY50000
-
-
-;=============================================================================
-; Variable declarations
-;=============================================================================
-GPR_VAR         UDATA
-localvar1       RES         1
-localvar2       RES         1
+    GLOBAL      xpDelay50000
 
 
 ;=============================================================================
-; Module
+;  VARIABLE DEFINITIONS
 ;=============================================================================
-        CODE                                    ; begin module
-DELAY50000
+; Unitialized Data Section
+GPR_MODULE_VAR      UDATA
+localvar1           RES     1
+localvar2           RES     1
+
+
+;=============================================================================
+;  MODULE PROGRAM
+;=============================================================================
+MODULE              CODE                        ; begin module
+xpDelay50000
         movlw       0x0E                        ; 49993 cycles
         movwf       localvar1
         movlw       0x28

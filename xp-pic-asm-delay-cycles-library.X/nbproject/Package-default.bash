@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-library.X.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=xp-pic-asm-delay-library.X.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=xp-pic-asm-delay-library.X/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/xp-pic-asm-delay-cycles-library.X.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=xp-pic-asm-delay-cycles-library.X.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=xp-pic-asm-delay-cycles-library.X/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/xp-pic-asm-delay-library.X/lib
+makeDirectory ${TMPDIR}/xp-pic-asm-delay-cycles-library.X/lib
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}lib/${OUTPUT_BASENAME}" 0644
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-delay-library.X.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-delay-cycles-library.X.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-delay-library.X.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/xp-pic-asm-delay-cycles-library.X.tar *
 checkReturnCode
 
 # Cleanup

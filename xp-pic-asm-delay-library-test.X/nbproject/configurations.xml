@@ -39,23 +39,7 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../xp-pic-asm-delay-library.X"
-                            CT="3"
-                            CN="default"
-                            AC="true"
-                            BL="true"
-                            WD="../xp-pic-asm-delay-library.X"
-                            BC="${MAKE}  -f Makefile CONF=default"
-                            DBC="${MAKE}  -f Makefile CONF=default TYPE_IMAGE=DEBUG_RUN"
-                            CC="rm -rf &quot;build/default&quot; &quot;dist/default&quot;"
-                            OP="dist/default/production/xp-pic-asm-delay-library.X.lib"
-                            DOP="dist/default/debug/xp-pic-asm-delay-library.X.lib"
-                            FL="dist/default/production/xp-pic-asm-delay-library.X.lib"
-                            PD="dist/default/production/xp-pic-asm-delay-library.X."
-                            DD="dist/default/debug/xp-pic-asm-delay-library.X.">
-              </makeArtifact>
-            </linkerLibProjectItem>
+            <linkerLibFileItem>../xp-pic-asm-delay-cycles-library.X/dist/default/production/xp-pic-asm-delay-cycles-library.X.lib</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>

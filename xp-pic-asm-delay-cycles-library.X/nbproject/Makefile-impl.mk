@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=xp-pic-asm-delay-library.X
+PROJECTNAME=xp-pic-asm-delay-cycles-library.X
 
 # Active Configuration
 DEFAULTCONF=default
