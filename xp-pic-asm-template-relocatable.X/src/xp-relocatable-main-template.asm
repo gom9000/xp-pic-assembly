@@ -45,7 +45,7 @@
 ;  VARIABLE DEFINITIONS
 ;=============================================================================
 ; Shared Uninitialized Data Section
-INTERRUPT_VAR       UDATA_SHR     
+INTERRUPT_VAR       UDATA_SHR
 w_temp              RES     1                   ; variable used for context saving 
 status_temp         RES     1                   ; variable used for context saving
 pclath_temp         RES     1                   ; variable used for context saving

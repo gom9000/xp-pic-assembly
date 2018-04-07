@@ -6,7 +6,7 @@
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2014 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,10 +14,10 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16F628a Microcontroller
+; Target.....: Microchip PICmicro 16F648a Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/13 - source refactory
-;              1.0 2014/04/08
+;              1.0 2017/04/08
 ; Description: Software management of switch and led arrays.
 ;=============================================================================
 
@@ -32,97 +32,79 @@
 
 
 ;=============================================================================
-;  Label equates
+;  LABEL EQUATES
 ;=============================================================================
-SWITCH          equ     PORTB
-SW1             equ     0x00
-SW2             equ     0x01
-SW3             equ     0x02
-SW4             equ     0x03
+SWITCH              EQU     PORTB
+SW1                 EQU     0x00
+SW2                 EQU     0x01
+SW3                 EQU     0x02
+SW4                 EQU     0x03
 
-LED             equ     PORTA
-LED1            equ     0x00
-LED2            equ     0x01
-LED3            equ     0x02
-LED4            equ     0x03
+LED                 EQU     PORTA
+LED1                EQU     0x00
+LED2                EQU     0x01
+LED3                EQU     0x02
+LED4                EQU     0x03
 
-XP_SWA_SIZE     equ     0x04
-XP_SWA_SAMPLES  equ     0x05
-XP_SWA_CLICKED  equ     0x00
-XP_SWA_STATUS   equ     0x07
-
-
-;=============================================================================
-;  File register use
-;=============================================================================
-    cblock	h'20'
-        w_temp                          ; variable used for context saving
-        status_temp                     ; variable used for context saving
-        pclath_temp                     ; variable used for context saving
-
-        d1, d2, d3                      ; the delay routine vars
-
-        xp_swa_index
-
-        ; switch-pressed samples counter
-        xp_swa_samples_counter: XP_SWA_SIZE
-
-        ; <7> single-click last stable status flag
-        ; <0> single-click status change flag
-        XP_SWA_REG: XP_SWA_SIZE+1
-
-        xp_swa_mask: XP_SWA_SIZE
-    endc
+XP_SWA_SIZE         EQU     0x04
+XP_SWA_SAMPLES      EQU     0x05
+XP_SWA_CLICKED      EQU     0x00
+XP_SWA_STATUS       EQU     0x07
 
 
 ;=============================================================================
-;  Start of code
+;  VARIABLE DEFINITIONS
 ;=============================================================================
-;start
-        org         h'0000'             ; processor reset vector
-        goto        main                ; jump to the main routine
+DELAY_VAR           UDATA
+d1                  RES     1                   ; the delay routine vars
+d2                  RES     1                   ;
+d3                  RES     1                   ;
 
-        org         h'0004'             ; interrupt vector location
-        movwf       w_temp              ; save off current W register contents
-        movf        STATUS, W           ; move status register into W register
-        movwf       status_temp         ; save off contents of STATUS register
-        movf        PCLATH, W           ; move pclath register into W register
-        movwf       pclath_temp         ; save off contents of PCLATH register
+XPSWA_VAR           UDATA
+xp_swa_shadow_port  RES     1
+xp_swa_index        RES     1
+xp_swa_samples_cnt  RES     XP_SWA_SIZE         ; switch-pressed samples counter
+xp_swa_register     RES     XP_SWA_SIZE         ; <7> single-click last stable status flag
+                                                ; <0> single-click status change flag
+xp_swa_mask         RES     XP_SWA_SIZE
 
-        ; isr code can go here or be located as a call subroutine elsewhere
-
-        movf        pclath_temp, W      ; retrieve copy of PCLATH register
-        movwf       PCLATH              ; restore pre-isr PCLATH register contents
-        movf        status_temp, W      ; retrieve copy of STATUS register
-        movwf       STATUS              ; restore pre-isr STATUS register contents
-        swapf       w_temp, F
-        swapf       w_temp, W           ; restore pre-isr W register contents
-        retfie                          ; return from interrupt
+XPSWA_SHR_VAR       UDATA_SHR
+XP_SWA_REG          RES     1                   ; <7> single-click last stable status flag
+                                                ; <0> single-click status change flag
+XPLDA_VAR           UDATA
+xp_lda_shadow_port  RES     1
 
 
 ;=============================================================================
-;  Init I/O ports
+;  RESET VECTOR
 ;=============================================================================
-init_ports
+RESET               CODE    0x0000              ; processor reset vector
+        pagesel     MAIN                        ; 
+        goto        MAIN                        ; go to beginning of program
 
-        errorlevel	-302
+
+;=============================================================================
+;  INIT ROUTINES
+;=============================================================================
+INIT_ROUTINES       CODE                        ; routines vector
+init_ports                                      ; init I/O ports
+        errorlevel  -302
 
         ; set PORTA JA1(A0-A3) as Output
-        bcf         STATUS, RP0             ; select Bank0
-        clrf        PORTA                   ; initialize PORTB by clearing output data latches
-        movlw       h'07'                   ; turn comparators off
-        movwf       CMCON                   ; and set port A mode I/O digital
-        bsf         STATUS, RP0             ; select Bank1
-        movlw       b'11100000'             ; PORTA input/output
-  		movwf       TRISA
+        banksel     PORTA
+        clrf        PORTA                       ; initialize PORTB by clearing output data latches
+        movlw       h'07'                       ; turn comparators off
+        movwf       CMCON                       ; and set port A mode I/O digital
+        banksel     TRISA
+        movlw       b'11100000'                 ; PORTA input/output
+  		movwf		TRISA
 
         ; set JB1 (B0-B3) as Input
-        bcf         STATUS, RP0             ; select Bank0
-        clrf        PORTB                   ; initialize PORTB by clearing output data latches
-        bsf         STATUS, RP0             ; select Bank1
-        movlw       b'00001111'             ; PORTB input/output
-        movwf       TRISB
-        clrf        STATUS                  ; select Bank0
+        banksel     PORTB
+        clrf        PORTB                       ; initialize PORTB by clearing output data latches
+        banksel     TRISB
+        movlw       b'00001111'                 ; PORTB input/output
+        movwf		TRISB
 
         errorlevel  +302
 
@@ -130,12 +112,12 @@ init_ports
 
 
 ;=============================================================================
-;  delay routines
+;  DELAY ROUTINES
 ;=============================================================================
-
-;  1ms delay routine (20MHz)
-delay1ms
-        movlw       0xE6                    ;4993 cycles
+DELAY_ROUTINES      CODE                        ; delay routines vector
+delay1ms                                        ; 1ms delay routine (20MHz)
+        banksel     d1                          ; point to DELAY_VAR section
+        movlw       0xE6                        ; 4993 cycles
         movwf       d1
         movlw       0x04
         movwf       d2
@@ -144,23 +126,27 @@ delay1ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay1ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ; 3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ; 4 cycles (including call)
 
 
 ;=============================================================================
-;  switch-array management routines
+;  SWITCHARRAY ROUTINES
+;  momentary toggling switch with sampling debounce tecnique
 ;=============================================================================
+XPSWA_ROUTINES      CODE                        ; swa routines vector
 xp_swa_init
+        banksel     xp_swa_shadow_port          ; point to XPSWA_VAR section
+        clrf        xp_swa_shadow_port
         movlw       b'00000001'
         movwf       xp_swa_index
     variable ii=0
     while ii < XP_SWA_SIZE
         movlw       XP_SWA_SAMPLES
-        movwf       xp_swa_samples_counter+ii
-        clrf        XP_SWA_REG+ii
+        movwf       xp_swa_samples_cnt+ii
+        clrf        xp_swa_register+ii
 
         movf        xp_swa_index, W
         movwf       xp_swa_mask+ii
@@ -171,28 +157,29 @@ ii+=1
         return
 
 xp_swa_scan
+        banksel     xp_swa_index                ; point to XPSWA_VAR section
         movwf       xp_swa_index                ; get the sw-index value from W
 
-        addlw       XP_SWA_REG+1                ; add the index to the base address of XP_SWA_REG + 1
+        addlw       xp_swa_register             ; add the index to the base address of xp_swa_register
         movwf       FSR                         ; load FSR with base address + offset
-        bcf         INDF, XP_SWA_CLICKED        ; use INDF to point to XP_SWA_REG[index] 
+        bcf         INDF, XP_SWA_CLICKED        ; use INDF to point to xp_swa_register[index] 
         bcf         XP_SWA_REG, XP_SWA_CLICKED
 
         movf        xp_swa_index, W
         addlw       xp_swa_mask
         movwf       FSR
-        movf        SWITCH, W
+        movf        xp_swa_shadow_port, W
         andwf       INDF, W
         btfss       STATUS, Z
         goto        swa_reset
 
         movf        xp_swa_index, W
-        addlw       xp_swa_samples_counter
+        addlw       xp_swa_samples_cnt
         movwf       FSR
-        decfsz      INDF
+        decfsz      INDF, F
         return
         movf        xp_swa_index, W
-        addlw       XP_SWA_REG+1
+        addlw       xp_swa_register
         movwf       FSR
         btfsc       INDF, XP_SWA_STATUS
         return
@@ -203,36 +190,44 @@ swa_action
         return
 swa_reset
         movf        xp_swa_index, W
-        addlw       xp_swa_samples_counter
+        addlw       xp_swa_samples_cnt
         movwf       FSR
         movlw       XP_SWA_SAMPLES
         movwf       INDF
 
         movf        xp_swa_index, W
-        addlw       XP_SWA_REG+1
+        addlw       xp_swa_register
         movwf       FSR
         bcf         INDF, XP_SWA_STATUS
         return
 
 
 ;=============================================================================
-;  Main program
+;  MAIN PROGRAM
 ;=============================================================================
-main
-        call        init_ports
+MAINPROGRAM         CODE                        ; begin program
+MAIN
+        lcall       init_ports
+        lcall       xp_swa_init
+        pagesel     $
 
-        bcf         LED, LED1
-        bcf         LED, LED2
-        bcf         LED, LED3
-        bcf         LED, LED4
+        banksel     LED                         ; shadowing of LED port reg
+        movf        LED, W
+        banksel     xp_lda_shadow_port
+        movwf       xp_lda_shadow_port
 
-        call        xp_swa_init
 mainloop
+        banksel     SWITCH                      ; shadowing of SWITCH port reg
+        movf        SWITCH, W
+        banksel     xp_swa_shadow_port
+        movwf       xp_swa_shadow_port
 
 switch_1_control
         movlw       SW1
-        call        xp_swa_scan
+        lcall       xp_swa_scan
+        pagesel     $
 
+        banksel     LED
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_2_control
         btfsc       LED, LED1
@@ -241,11 +236,12 @@ switch_1_control
         goto        switch_2_control
         bcf         LED, LED1
 
-
 switch_2_control
         movlw       SW2
-        call        xp_swa_scan
+        lcall       xp_swa_scan
+        pagesel     $
 
+        banksel     LED
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_3_control
         btfsc       LED, LED2
@@ -254,11 +250,12 @@ switch_2_control
         goto        switch_3_control
         bcf         LED, LED2
 
-
 switch_3_control
         movlw       SW3
-        call        xp_swa_scan
+        lcall       xp_swa_scan
+        pagesel     $
 
+        banksel     LED
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_4_control
         btfsc       LED, LED3
@@ -267,11 +264,12 @@ switch_3_control
         goto        switch_4_control
         bcf         LED, LED3
 
-
-switch_4_control ; momentary toggling switch with sampling debounce tecnique
+switch_4_control
         movlw       SW4
-        call        xp_swa_scan
+        lcall       xp_swa_scan
+        pagesel     $
 
+        banksel     LED
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        end_sw_controls
         btfsc       LED, LED4
@@ -280,9 +278,9 @@ switch_4_control ; momentary toggling switch with sampling debounce tecnique
         goto        end_sw_controls
         bcf         LED, LED4
 
-
 end_sw_controls
-        call        delay1ms
+        lcall       delay1ms
+        pagesel     $
         goto        mainloop
 
-        end
+        END                                     ; end program

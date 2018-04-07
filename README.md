@@ -20,7 +20,7 @@ Test code for the delay library.
 
 ### Scheduler
 * [xp-pic-asm-scheduler](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler.X/)
-A simple scheduler manager for executing tasks at regular intervals.
+A simple scheduler manager for executing tasks at regular intervals using Timer0.
 * [xp-pic-asm-scheduler-library](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler-library.X/)
 A library version of the scheduler.
 * [xp-pic-asm-scheduler-library-test](https://github.com/gos95-electronics/xp-pic-asm/tree/master/xp-pic-asm-scheduler-library-test.X/)

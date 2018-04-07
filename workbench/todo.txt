@@ -1,12 +1,5 @@
 PIC Assembly eXPerience 
 
-PHASE I+
---------
-
-- reworking:
-	- xp-pic-asm-io*
-
-
 PHASE II
 --------
 

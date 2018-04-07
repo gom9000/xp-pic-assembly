@@ -6,7 +6,7 @@
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2014 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2017 by Alessandro Fraschetti (gos95@gommagomma.net).
 ;
 ; This file is part of the xp-pic-asm project:
 ;     https://github.com/gos95-electronics/xp-pic-asm
@@ -14,97 +14,82 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PIC 16F628a Microcontroller
+; Target.....: Microchip PICmicro 16F648a Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/13 - source refactory
-;              1.0 2014/04/08
+;              1.0 2017/04/08
 ; Description: Software debounce tecniques for input switches.
 ;=============================================================================
 
     PROCESSOR   16f648a
-    __CONFIG    _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _HS_OSC
     INCLUDE     <p16f648a.inc>
 
 
 ;=============================================================================
-;  Label equates
+;  CONFIGURATION
 ;=============================================================================
-SWITCH          equ     PORTB
-SW1             equ     0x00
-SW2             equ     0x01
-SW3             equ     0x02
-SW4             equ     0x03
-
-LED             equ     PORTA
-LED1            equ     0x00
-LED2            equ     0x01
-LED3            equ     0x02
-LED4            equ     0x03
+    __CONFIG    _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _HS_OSC
 
 
 ;=============================================================================
-;  File register use
+;  LABEL EQUATES
 ;=============================================================================
-    cblock	h'20'
-        w_temp                          ; variable used for context saving
-        status_temp                     ; variable used for context saving
-        pclath_temp                     ; variable used for context saving
+SWITCH              EQU     PORTB
+SW1                 EQU     0x00
+SW2                 EQU     0x01
+SW3                 EQU     0x02
+SW4                 EQU     0x03
 
-        d1, d2, d3                      ; the delay routine vars
-
-        swstatereg                      ;register for switches state (1=UP, 0=DW)
-        sample_counter
-    endc
-
-
-;=============================================================================
-;  Start of code
-;=============================================================================
-;start
-	org			h'0000'				; processor reset vector
-	goto		main				; jump to the main routine
-
-	org			h'0004'				; interrupt vector location
-	movwf		w_temp				; save off current W register contents
-	movf		STATUS, W			; move status register into W register
-	movwf		status_temp			; save off contents of STATUS register
-    movf        PCLATH, W           ; move pclath register into W register
-    movwf       pclath_temp         ; save off contents of PCLATH register
-
-    ; isr code can go here or be located as a call subroutine elsewhere
-
-    movf        pclath_temp, W      ; retrieve copy of PCLATH register
-    movwf       PCLATH              ; restore pre-isr PCLATH register contents
-    movf		status_temp, W		; retrieve copy of STATUS register
-	movwf		STATUS				; restore pre-isr STATUS register contents
-	swapf		w_temp, F
-	swapf		w_temp, W			; restore pre-isr W register contents
-	retfie							; return from interrupt
+LED                 EQU     PORTA
+LED1                EQU     0x00
+LED2                EQU     0x01
+LED3                EQU     0x02
+LED4                EQU     0x03
 
 
 ;=============================================================================
-;  Init I/O ports
+;  VARIABLE DEFINITIONS
 ;=============================================================================
+; Shared Uninitialized Data Section
+SHARED_VAR          UDATA_SHR     
+swstatereg          RES     1                   ; switches state (1=UP, 0=DW)
+sample_counter      RES     1
+d1                  RES     1                   ; the delay routine vars
+d2                  RES     1                   ;
+d3                  RES     1                   ;
+
+
+;=============================================================================
+;  RESET VECTOR
+;=============================================================================
+RESET               CODE    0x0000              ; processor reset vector
+        pagesel     MAIN                        ; 
+        goto        MAIN                        ; go to beginning of program
+
+
+;=============================================================================
+;  INIT ROUTINES
+;=============================================================================
+INIT_ROUTINES       CODE                        ; routines vector
 init_ports
 
         errorlevel	-302
 
         ; set PORTA JA1(A0-A3) as Output
-        bcf			STATUS, RP0 			; select Bank0
-        clrf		PORTA					; initialize PORTB by clearing output data latches
-        movlw       h'07'                   ; turn comparators off
-        movwf       CMCON                   ; and set port A mode I/O digital
-        bsf			STATUS, RP0				; select Bank1
-        movlw		b'11100000'				; PORTA input/output
+        pagesel     PORTA
+        clrf		PORTA                       ; initialize PORTB by clearing output data latches
+        movlw       h'07'                       ; turn comparators off
+        movwf       CMCON                       ; and set port A mode I/O digital
+        pagesel     TRISA
+        movlw		b'11100000'                 ; PORTA input/output
   		movwf		TRISA
 
         ; set JB1 (B0-B3) as Input
-        bcf			STATUS, RP0 			; select Bank0
-        clrf		PORTB					; initialize PORTB by clearing output data latches
-        bsf			STATUS, RP0				; select Bank1
-        movlw		b'00001111'				; PORTB input/output
+        pagesel     PORTB
+        clrf		PORTB                       ; initialize PORTB by clearing output data latches
+        pagesel     TRISB
+        movlw		b'00001111'                 ; PORTB input/output
         movwf		TRISB
-        clrf		STATUS					; select Bank0
 
         errorlevel  +302
 
@@ -112,12 +97,13 @@ init_ports
 
 
 ;=============================================================================
-;  delay routines
+;  DELAY ROUTINES
 ;=============================================================================
+DELAY_ROUTINES      CODE                        ; routines vector
 
 ;  1s delay routine (20MHz)
 delay1s
-        movlw       0x2C                    ;4999993 cycles
+        movlw       0x2C                        ;4999993 cycles
         movwf       d1
         movlw       0xE7
         movwf       d2
@@ -130,15 +116,15 @@ delay1s_loop
         goto        $+2
         decfsz      d3, F
         goto        delay1s_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  100ms delay routine (20MHz)
 delay100ms
-        movlw       0x03                    ;499994 cycles
+        movlw       0x03                        ;499994 cycles
         movwf       d1
         movlw       0x18
         movwf       d2
@@ -151,14 +137,14 @@ delay100ms_loop
         goto        $+2
         decfsz      d3, F
         goto        delay100ms_loop
-        goto        $+1                     ;2 cycles
+        goto        $+1                         ;2 cycles
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  50ms delay routine (20MHz)
 delay50ms
-        movlw       0x4E                    ;249993  cycles
+        movlw       0x4E                        ;249993  cycles
         movwf       d1
         movlw       0xC4
         movwf       d2
@@ -167,15 +153,15 @@ delay50ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay50ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  25ms delay routine (20MHz)
 delay25ms
-        movlw       0xA6                    ;124993  cycles
+        movlw       0xA6                        ;124993  cycles
         movwf       d1
         movlw       0x62
         movwf       d2
@@ -184,15 +170,15 @@ delay25ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay25ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  10ms delay routine (20MHz)
 delay10ms
-        movlw       0x0E                    ;49993 cycles
+        movlw       0x0E                        ;49993 cycles
         movwf       d1
         movlw       0x28
         movwf       d2
@@ -201,15 +187,15 @@ delay10ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay10ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  5ms delay routine (20MHz)
 delay5ms
-        movlw       0x86                    ;24993 cycles
+        movlw       0x86                        ;24993 cycles
         movwf       d1
         movlw       0x14
         movwf       d2
@@ -218,15 +204,15 @@ delay5ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay5ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;  1ms delay routine (20MHz)
 delay1ms
-        movlw       0xE6                    ;4993 cycles
+        movlw       0xE6                        ;4993 cycles
         movwf       d1
         movlw       0x04
         movwf       d2
@@ -235,17 +221,19 @@ delay1ms_loop
         goto        $+2
         decfsz      d2, F
         goto        delay1ms_loop
-        goto        $+1                     ;3 cycles
+        goto        $+1                         ;3 cycles
         nop
 
-        return                              ;4 cycles (including call)
+        return                                  ;4 cycles (including call)
 
 
 ;=============================================================================
-;  Main program
+;  MAIN PROGRAM
 ;=============================================================================
-main
-		call 		init_ports
+MAINPROGRAM         CODE                        ; begin program
+MAIN
+		lcall 		init_ports
+        pagesel     $
 
         bcf         LED, LED1
         bcf         LED, LED2
@@ -271,7 +259,8 @@ switch_1_control ; momentary toggling switch with no debounce
 switch_2_control ; momentary toggling switch with single delay debounce tecnique
         btfsc       SWITCH, SW2
         goto        switch_2_reset
-        call        delay1ms
+        lcall       delay1ms
+        pagesel     $
         btfsc       SWITCH, SW2
         goto        switch_2_reset
 
@@ -299,39 +288,39 @@ switch_3_up
 
 
 switch_4_control ; momentary toggling switch with sampling debounce tecnique
-        btfsc       swstatereg, SW4         ; last SW stable state is UP?
+        btfsc       swstatereg, SW4             ; last SW stable state is UP?
         goto        sample_sw_up
 
-sample_sw_down                              ; scan for SW = DW
+sample_sw_down                                  ; scan for SW = DW
         clrw
-        btfss       SWITCH, SW4             ; if SW is DW
-        incf        sample_counter, W       ; inc counter to W
-        movwf       sample_counter          ; store W value to F and count samples
+        btfss       SWITCH, SW4                 ; if SW is DW
+        incf        sample_counter, W           ; inc counter to W
+        movwf       sample_counter              ; store W value to F and count samples
         goto        count_samples
 
-sample_sw_up                                ; scan for SW = UP
+sample_sw_up                                    ; scan for SW = UP
         clrw
-        btfsc       SWITCH, SW4             ; if SW is UP
-        incf        sample_counter, W       ; inc counter to W
-        movwf       sample_counter          ; store W value to F and count samples
+        btfsc       SWITCH, SW4                 ; if SW is UP
+        incf        sample_counter, W           ; inc counter to W
+        movwf       sample_counter              ; store W value to F and count samples
 
-count_samples                               ; execute debounce
-        movf        sample_counter, W       ; counter value reached sample size?
+count_samples                                   ; execute debounce
+        movf        sample_counter, W           ; counter value reached sample size?
         xorlw       5
         btfss       STATUS, Z
         goto        end_sw_controls
 
-        btfsc       swstatereg, SW4         ; invert SW stable state
+        btfsc       swstatereg, SW4             ; invert SW stable state
         goto        $+3
         bsf         swstatereg, SW4
         goto        $+2
         bcf         swstatereg, SW4
 
-        clrf        sample_counter          ; clear and go to the SW action
+        clrf        sample_counter              ; clear and go to the SW action
         btfss       swstatereg, SW4
         goto        end_sw_controls
 
-switch_action                               ; do action
+switch_action                                   ; do action
         btfsc       LED, LED4
         goto        $+3
         bsf         LED, LED4
@@ -340,7 +329,8 @@ switch_action                               ; do action
 
 
 end_sw_controls
-        call        delay1ms
+        lcall       delay1ms
+        pagesel     $
         goto        mainloop
 
-        end
+        END                                     ; end program
