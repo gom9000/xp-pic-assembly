@@ -12,14 +12,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>src/task_100ms_action.asm</itemPath>
-      <itemPath>src/task_10ms_action.asm</itemPath>
-      <itemPath>src/task_1s_action.asm</itemPath>
-      <itemPath>src/task_250ms_action.asm</itemPath>
-      <itemPath>src/task_2ms_action.asm</itemPath>
-      <itemPath>src/task_2s_action.asm</itemPath>
-      <itemPath>src/task_500ms_action.asm</itemPath>
-      <itemPath>src/task_50ms_action.asm</itemPath>
       <itemPath>src/xp-scheduler-library-test.asm</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
