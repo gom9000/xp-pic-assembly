@@ -46,11 +46,14 @@ LED2                EQU     0x01
 LED3                EQU     0x02
 LED4                EQU     0x03
 
-XP_SWA_SIZE         EQU     0x04
+ARRAY_SIZE          EQU     0x04
+
+XP_SWA_SIZE         EQU     ARRAY_SIZE
 XP_SWA_SAMPLES      EQU     0x05
 XP_SWA_CLICKED      EQU     0x00
 XP_SWA_STATUS       EQU     0x07
 
+XP_LDA_SIZE         EQU     ARRAY_SIZE
 
 ;=============================================================================
 ;  VARIABLE DEFINITIONS
@@ -63,16 +66,16 @@ d3                  RES     1                   ;
 XPSWA_VAR           UDATA
 xp_swa_shadow_port  RES     1
 xp_swa_index        RES     1
+xp_swa_mask         RES     XP_SWA_SIZE
 xp_swa_samples_cnt  RES     XP_SWA_SIZE         ; switch-pressed samples counter
 xp_swa_register     RES     XP_SWA_SIZE         ; <7> single-click last stable status flag
                                                 ; <0> single-click status change flag
-xp_swa_mask         RES     XP_SWA_SIZE
+XP_SWA_REG          RES     1
 
-XPSWA_SHR_VAR       UDATA_SHR
-XP_SWA_REG          RES     1                   ; <7> single-click last stable status flag
-                                                ; <0> single-click status change flag
 XPLDA_VAR           UDATA
 xp_lda_shadow_port  RES     1
+xp_lda_index        RES     1
+xp_lda_mask         RES     1
 
 
 ;=============================================================================
@@ -210,18 +213,53 @@ swa_reset
 
 
 ;=============================================================================
+;  LEDARRAY ROUTINES
+;=============================================================================
+XPLDA_ROUTINES      CODE                        ; lda routines vector
+xp_lda_init
+        banksel     xp_lda_shadow_port          ; point to XPLDA_VAR section
+        clrf        xp_lda_shadow_port
+        return
+;
+xp_lda_shadow_ldaport
+        banksel     xp_lda_shadow_port
+        movwf       xp_lda_shadow_port
+        return
+;
+xp_lda_toggle_led
+        banksel     xp_lda_index
+        movwf       xp_lda_index
+        incf        xp_lda_index, F
+        movlw       b'00000001'
+        movwf       xp_lda_mask
+        bcf         STATUS, C
+lda_make_mask
+        decf        xp_lda_index, F
+        btfsc       STATUS, Z
+        goto        lda_toggle
+        rlf         xp_lda_mask, F
+        goto        lda_make_mask
+lda_toggle
+        movf        xp_lda_mask, W
+        xorwf       xp_lda_shadow_port, F
+        movf        xp_lda_shadow_port, W
+        return
+
+
+;=============================================================================
 ;  MAIN PROGRAM
 ;=============================================================================
 MAINPROGRAM         CODE                        ; begin program
 MAIN
         lcall       init_ports
         lcall       xp_swa_init
+        lcall       xp_lda_init
         pagesel     $
 
         banksel     LED                         ; shadowing of LED port reg
         movf        LED, W
-        banksel     xp_lda_shadow_port
-        movwf       xp_lda_shadow_port
+        lcall       xp_lda_shadow_ldaport
+        pagesel     $
 
 mainloop
         banksel     SWITCH
@@ -234,56 +272,56 @@ switch_1_control
         lcall       xp_swa_scan
         pagesel     $
 
-        banksel     LED
+        banksel     XP_SWA_REG
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_2_control
-        btfsc       LED, LED1
-        goto        $+3
-        bsf         LED, LED1
-        goto        switch_2_control
-        bcf         LED, LED1
+        movlw       LED1
+        lcall       xp_lda_toggle_led
+        pagesel     $
+        banksel     LED
+        movwf       LED
 
 switch_2_control
         movlw       SW2
         lcall       xp_swa_scan
         pagesel     $
 
-        banksel     LED
+        banksel     XP_SWA_REG
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_3_control
-        btfsc       LED, LED2
-        goto        $+3
-        bsf         LED, LED2
-        goto        switch_3_control
-        bcf         LED, LED2
+        movlw       LED2
+        lcall       xp_lda_toggle_led
+        pagesel     $
+        banksel     LED
+        movwf       LED
 
 switch_3_control
         movlw       SW3
         lcall       xp_swa_scan
         pagesel     $
 
-        banksel     LED
+        banksel     XP_SWA_REG
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        switch_4_control
-        btfsc       LED, LED3
-        goto        $+3
-        bsf         LED, LED3
-        goto        switch_4_control
-        bcf         LED, LED3
+        movlw       LED3
+        lcall       xp_lda_toggle_led
+        pagesel     $
+        banksel     LED
+        movwf       LED
 
 switch_4_control
         movlw       SW4
         lcall       xp_swa_scan
         pagesel     $
 
-        banksel     LED
+        banksel     XP_SWA_REG
         btfss       XP_SWA_REG, XP_SWA_CLICKED
         goto        end_sw_controls
-        btfsc       LED, LED4
-        goto        $+3
-        bsf         LED, LED4
-        goto        end_sw_controls
-        bcf         LED, LED4
+        movlw       LED4
+        lcall       xp_lda_toggle_led
+        pagesel     $
+        banksel     LED
+        movwf       LED
 
 end_sw_controls
         lcall       delay1ms
