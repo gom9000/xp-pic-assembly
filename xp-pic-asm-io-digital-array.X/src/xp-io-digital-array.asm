@@ -156,6 +156,13 @@ ii+=1
         clrf        xp_swa_index
         return
 
+;
+xp_swa_shadow_swaport
+        banksel     xp_swa_shadow_port
+        movwf       xp_swa_shadow_port
+        return
+
+;
 xp_swa_scan
         banksel     xp_swa_index                ; point to XPSWA_VAR section
         movwf       xp_swa_index                ; get the sw-index value from W
@@ -217,10 +224,10 @@ MAIN
         movwf       xp_lda_shadow_port
 
 mainloop
-        banksel     SWITCH                      ; shadowing of SWITCH port reg
+        banksel     SWITCH
         movf        SWITCH, W
-        banksel     xp_swa_shadow_port
-        movwf       xp_swa_shadow_port
+        lcall       xp_swa_shadow_swaport
+        pagesel     $
 
 switch_1_control
         movlw       SW1
