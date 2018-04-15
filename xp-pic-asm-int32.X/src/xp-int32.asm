@@ -58,6 +58,7 @@ STATUS32            RES     1                   ; 32-bit arithmetic status regis
 accA                RES     4                   ; 32-bit accumulators
 accB                RES     4                   ; little-endian byte ordering
 accC                RES     4                   ;
+acc8                RES     1
 
 
 ;=============================================================================
@@ -79,13 +80,31 @@ ARITH32_CODE        CODE
 ;*************************************************************************
 load_accA
         banksel     accA
-        movlw       .10 & 0xFF
+        movwf       acc8
+
+        movwf       FSR                         ; copy byte 0
+        movf        INDF, W
         movwf       accA
-        movlw       .10 >> .08 % 0xFF
+
+        movf        acc8, W                     ; copy byte 1
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accA+1
-        movlw       .10 >> .16 % 0xFF
+
+        movf        acc8, W                     ; copy byte 2
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accA+2
-        movlw       .10 >> .24 % 0xFF
+
+        movf        acc8, W                     ; copy byte 3
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accA+3
         return
 
@@ -95,15 +114,34 @@ load_accA
 ;*************************************************************************
 load_accB
         banksel     accB
-        movlw       .13 & 0xFF
+        movwf       acc8
+
+        movwf       FSR                         ; copy byte 0
+        movf        INDF, W
         movwf       accB
-        movlw       .13 >> .08 % 0xFF
+
+        movf        acc8, W                     ; copy byte 1
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accB+1
-        movlw       .13 >> .16 % 0xFF
+
+        movf        acc8, W                     ; copy byte 2
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accB+2
-        movlw       .13 >> .24 % 0xFF
+
+        movf        acc8, W                     ; copy byte 3
+        incf        acc8, F
+        movf        acc8, W
+        movwf       FSR
+        movf        INDF, W
         movwf       accB+3
         return
+
 
 ;*************************************************************************
 ; 32-bit Precision Addition: accA(32-bit) = accA(32-bit) + accB(32-bit)
@@ -143,19 +181,19 @@ sub32                                           ; var3 = var2 - var1
         banksel     STATUS32
         clrf        STATUS32
 
-        movf        accA, W                     ; sub byte 0 (LSB)
+        movf        accB, W                     ; sub byte 0 (LSB)
         subwf       accA, F
-        movf        accA+1, W                   ; sub byte 1
+        movf        accB+1, W                   ; sub byte 1
         btfss       STATUS, C
-        incfsz      accA+1, W
+        incfsz      accB+1, W
         subwf       accA+1, F
-        movf        accA+2, W                   ; sub byte 2
+        movf        accB+2, W                   ; sub byte 2
         btfss       STATUS, C
-        incfsz      accA+2, W
+        incfsz      accB+2, W
         subwf       accA+2, F
-        movf        accA+3, W                   ; sub byte 3 (MSB)
+        movf        accB+3, W                   ; sub byte 3 (MSB)
         btfss       STATUS, C
-        incfsz      accA+3, W
+        incfsz      accB+3, W
         subwf       accA+3, F
 ;        btfsc       STATUS, C
 ;        bsf         ARITH32REG, OVERFLOW
@@ -168,13 +206,13 @@ sub32                                           ; var3 = var2 - var1
 MAINPROGRAM         CODE                        ; begin program
 MAIN
         banksel     var1
-        movlw       .10 & 0xFF
+        movlw       .257 & 0xFF
         movwf       var1
-        movlw       .10 >> .08 % 0xFF
+        movlw       .257 >> .08 % 0xFF
         movwf       var1+1
-        movlw       .10 >> .16 % 0xFF
+        movlw       .257 >> .16 % 0xFF
         movwf       var1+2
-        movlw       .10 >> .24 % 0xFF
+        movlw       .257 >> .24 % 0xFF
         movwf       var1+3
 
         movlw       .11 & 0xFF
@@ -197,7 +235,7 @@ MAIN
         pagesel     load_accB
         call        load_accB
 
-        call        add32
+        call        sub32
 
         nop
 
