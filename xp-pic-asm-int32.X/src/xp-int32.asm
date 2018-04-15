@@ -57,6 +57,7 @@ STATUS32            RES     1                   ; 32-bit arithmetic status regis
 
 accA                RES     4                   ; 32-bit accumulators
 accB                RES     4                   ; little-endian byte ordering
+accC                RES     4                   ;
 
 
 ;=============================================================================
@@ -110,32 +111,24 @@ load_accB
 ;                    SF :
 ;                    OF :
 ;*************************************************************************
-add32                                           ; var3 = var1 + var2
+add32
+        banksel     STATUS32
         clrf        STATUS32
-        banksel     accA
-        movf        var2, W                     ; var3 = var2
-        movwf       var3
-        movf        var2+1, W
-        movwf       var3+1
-        movf        var2+2, W
-        movwf       var3+2
-        movf        var2+3, W
-        movwf       var3+3
 
-        movf        var1, W                     ; add byte 0 (LSB)
-        addwf       var3, F
-        movf        var1+1, W                   ; add byte 1
+        movf        accB, W                     ; add byte 0 (LSB)
+        addwf       accA, F
+        movf        accB+1, W                   ; add byte 1
         btfsc       STATUS, C
-        incfsz      var1+1, W
-        addwf       var3+1, F
-        movf        var1+2, W                   ; add byte 2
+        incfsz      accB+1, W
+        addwf       accA+1, F
+        movf        accB+2, W                   ; add byte 2
         btfsc       STATUS, C
-        incfsz      var1+2, W
-        addwf       var3+2, F
-        movf        var1+3, W                   ; add byte 3 (MSB)
+        incfsz      accB+2, W
+        addwf       accA+2, F
+        movf        accB+3, W                   ; add byte 3 (MSB)
         btfsc       STATUS, C
-        incfsz      var1+3, W
-        addwf       var3+3, F
+        incfsz      accB+3, W
+        addwf       accA+3, F
         btfsc       STATUS, C
         bsf         STATUS32, CF
         return
@@ -147,31 +140,23 @@ add32                                           ; var3 = var1 + var2
 ;                    OF :
 ;*************************************************************************
 sub32                                           ; var3 = var2 - var1
+        banksel     STATUS32
         clrf        STATUS32
-        banksel     accA
-        movf        var2, W                     ; var3 = var2
-        movwf       var3
-        movf        var2+1, W
-        movwf       var3+1
-        movf        var2+2, W
-        movwf       var3+2
-        movf        var2+3, W
-        movwf       var3+3
 
-        movf        var1, W                     ; sub byte 0 (LSB)
-        subwf       var3, F
-        movf        var1+1, W                   ; sub byte 1
+        movf        accA, W                     ; sub byte 0 (LSB)
+        subwf       accA, F
+        movf        accA+1, W                   ; sub byte 1
         btfss       STATUS, C
-        incfsz      var1+1, W
-        subwf       var3+1, F
-        movf        var1+2, W                   ; sub byte 2
+        incfsz      accA+1, W
+        subwf       accA+1, F
+        movf        accA+2, W                   ; sub byte 2
         btfss       STATUS, C
-        incfsz      var1+2, W
-        subwf       var3+2, F
-        movf        var1+3, W                   ; sub byte 3 (MSB)
+        incfsz      accA+2, W
+        subwf       accA+2, F
+        movf        accA+3, W                   ; sub byte 3 (MSB)
         btfss       STATUS, C
-        incfsz      var1+3, W
-        subwf       var3+3, F
+        incfsz      accA+3, W
+        subwf       accA+3, F
 ;        btfsc       STATUS, C
 ;        bsf         ARITH32REG, OVERFLOW
         return
@@ -192,13 +177,13 @@ MAIN
         movlw       .10 >> .24 % 0xFF
         movwf       var1+3
 
-        movlw       .10 & 0xFF
+        movlw       .11 & 0xFF
         movwf       var2
-        movlw       .10 >> .08 % 0xFF
+        movlw       .11 >> .08 % 0xFF
         movwf       var2+1
-        movlw       .10 >> .16 % 0xFF
+        movlw       .11 >> .16 % 0xFF
         movwf       var2+2
-        movlw       .10 >> .24 % 0xFF
+        movlw       .11 >> .24 % 0xFF
         movwf       var2+3
 
 
@@ -214,6 +199,6 @@ MAIN
 
         call        add32
 
-
+        nop
 
         END                                     ; end program
