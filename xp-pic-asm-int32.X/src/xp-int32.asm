@@ -33,20 +33,30 @@
 ;=============================================================================
 ;  LABEL EQUATES
 ;=============================================================================
-OVERFLOW            EQU     0x00
+CF                  EQU     0x0
+SF                  EQU     0x2
+OF                  EQU     0x3
 
 
 ;=============================================================================
-;  VARIABLE DEFINITIONS
+;  32-BIT PRECISION ARITHMETIC VARIABLE DEFINITIONS
 ;=============================================================================
-; Unitialized Data Section
-GPR_VAR             UDATA
-ARITH32REG          RES     1                   ; 32-bit arithmetic register:
-                                                ; <0> overflow
-
+GPR_DATA            UDATA
 var1                RES     4                   ; 32-bit variables
-var2                RES     4                   ; little-endian byte ordering
-var3                RES     4                   ;
+var2                RES     4                   ;
+
+
+;=============================================================================
+;  32-BIT PRECISION ARITHMETIC VARIABLE DEFINITIONS
+;=============================================================================
+ARITH32_DATA        UDATA
+STATUS32            RES     1                   ; 32-bit arithmetic status register:
+                                                ; <0> carry flag
+                                                ; <1> sign flag
+                                                ; <2> overflow flag
+
+accA                RES     4                   ; 32-bit accumulators
+accB                RES     4                   ; little-endian byte ordering
 
 
 ;=============================================================================
@@ -58,46 +68,50 @@ RESET               CODE    0x0000              ; processor reset vector
 
 
 ;=============================================================================
-;  INIT ROUTINES
+;  32-BIT PRECISION ARITHMETIC ROUTINE VECTOR
 ;=============================================================================
-INIT_ROUTINES       CODE                        ; routines vector
-init_var1
-        banksel     var1
+ARITH32_CODE        CODE
+
+;*************************************************************************
+; Load 32-bit values to accA
+; Value LSB-address in W
+;*************************************************************************
+load_accA
+        banksel     accA
         movlw       .10 & 0xFF
-        movwf       var1
+        movwf       accA
         movlw       .10 >> .08 % 0xFF
-        movwf       var1+1
+        movwf       accA+1
         movlw       .10 >> .16 % 0xFF
-        movwf       var1+2
+        movwf       accA+2
         movlw       .10 >> .24 % 0xFF
-        movwf       var1+3
+        movwf       accA+3
         return
 
-init_var2
-        banksel     var2
+;*************************************************************************
+; Load 32-bit values to accB
+; Value LSB-address in W
+;*************************************************************************
+load_accB
+        banksel     accB
         movlw       .13 & 0xFF
-        movwf       var2
+        movwf       accB
         movlw       .13 >> .08 % 0xFF
-        movwf       var2+1
+        movwf       accB+1
         movlw       .13 >> .16 % 0xFF
-        movwf       var2+2
+        movwf       accB+2
         movlw       .13 >> .24 % 0xFF
-        movwf       var2+3
+        movwf       accB+3
         return
 
-
-;=============================================================================
-;  MAIN PROGRAM
-;=============================================================================
-MAINPROGRAM         CODE                        ; begin program
-MAIN
-        pagesel     init_var1
-        call        init_var1
-        call        init_var2
-        pagesel     $
-
+;*************************************************************************
+; 32-bit Precision Addition: accA(32-bit) = accA(32-bit) + accB(32-bit)
+; Status32 Affected: CF :
+;                    SF :
+;                    OF :
+;*************************************************************************
 add32                                           ; var3 = var1 + var2
-        clrf        ARITH32REG
+        clrf        STATUS32
         movf        var2, W                     ; var3 = var2
         movwf       var3
         movf        var2+1, W
@@ -122,17 +136,17 @@ add32                                           ; var3 = var1 + var2
         incfsz      var1+3, W
         addwf       var3+3, F
         btfsc       STATUS, C
-        bsf         ARITH32REG, OVERFLOW
+        bsf         STATUS32, CF
+        return
 
-        nop
-
-        pagesel     init_var1
-        call        init_var1
-        call        init_var2
-        pagesel     $
-
+;*************************************************************************
+; 32-bit Precision Subctraction: accA(32-bit) = accA(32-bit) - accB(32-bit)
+; Status32 Affected: CF :
+;                    SF :
+;                    OF :
+;*************************************************************************
 sub32                                           ; var3 = var2 - var1
-        clrf        ARITH32REG
+        clrf        STATUS32
         movf        var2, W                     ; var3 = var2
         movwf       var3
         movf        var2+1, W
@@ -156,9 +170,25 @@ sub32                                           ; var3 = var2 - var1
         btfss       STATUS, C
         incfsz      var1+3, W
         subwf       var3+3, F
-        btfsc       STATUS, C
+;        btfsc       STATUS, C
 ;        bsf         ARITH32REG, OVERFLOW
+        return
 
-        nop
+
+;=============================================================================
+;  MAIN PROGRAM
+;=============================================================================
+MAINPROGRAM         CODE                        ; begin program
+
+
+MAIN
+        pagesel     load_accA
+        call        load_accA
+        call        load_accB
+        call        add32
+
+        call        load_accA
+        call        load_accB
+        call        sub32
 
         END                                     ; end program
