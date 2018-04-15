@@ -112,6 +112,7 @@ load_accB
 ;*************************************************************************
 add32                                           ; var3 = var1 + var2
         clrf        STATUS32
+        banksel     accA
         movf        var2, W                     ; var3 = var2
         movwf       var3
         movf        var2+1, W
@@ -147,6 +148,7 @@ add32                                           ; var3 = var1 + var2
 ;*************************************************************************
 sub32                                           ; var3 = var2 - var1
         clrf        STATUS32
+        banksel     accA
         movf        var2, W                     ; var3 = var2
         movwf       var3
         movf        var2+1, W
@@ -179,16 +181,39 @@ sub32                                           ; var3 = var2 - var1
 ;  MAIN PROGRAM
 ;=============================================================================
 MAINPROGRAM         CODE                        ; begin program
-
-
 MAIN
+        banksel     var1
+        movlw       .10 & 0xFF
+        movwf       var1
+        movlw       .10 >> .08 % 0xFF
+        movwf       var1+1
+        movlw       .10 >> .16 % 0xFF
+        movwf       var1+2
+        movlw       .10 >> .24 % 0xFF
+        movwf       var1+3
+
+        movlw       .10 & 0xFF
+        movwf       var2
+        movlw       .10 >> .08 % 0xFF
+        movwf       var2+1
+        movlw       .10 >> .16 % 0xFF
+        movwf       var2+2
+        movlw       .10 >> .24 % 0xFF
+        movwf       var2+3
+
+
+        banksel     var1
+        movlw       var1
         pagesel     load_accA
         call        load_accA
+
+        banksel     var2
+        movlw       var2
+        pagesel     load_accB
         call        load_accB
+
         call        add32
 
-        call        load_accA
-        call        load_accB
-        call        sub32
+
 
         END                                     ; end program
