@@ -34,8 +34,11 @@
 ;  LABEL EQUATES
 ;=============================================================================
 CF                  EQU     0x0
-SF                  EQU     0x2
-OF                  EQU     0x3
+SF                  EQU     0x1
+OF                  EQU     0x2
+
+ACCASF              EQU     0x4
+ACCBSF              EQU     0x5
 
 
 ;=============================================================================
@@ -51,9 +54,11 @@ var2                RES     4                   ;
 ;=============================================================================
 ARITH32_DATA        UDATA
 STATUS32            RES     1                   ; 32-bit arithmetic status register:
-                                                ; <0> carry flag
-                                                ; <1> sign flag
+                                                ; <0> carry out flag
+                                                ; <1> sign flag : H = +, L = -
                                                 ; <2> overflow flag
+                                                ; <4> accA sign flag
+                                                ; <5> accB sign flag
 
 accA                RES     4                   ; 32-bit accumulators
 accB                RES     4                   ; little-endian byte ordering
@@ -106,6 +111,11 @@ load_accA
         movwf       FSR
         movf        INDF, W
         movwf       accA+3
+
+        bcf         STATUS32, ACCASF            ; set accA SF
+        btfsc       accA+3, 7
+        bsf         STATUS32, ACCASF
+
         return
 
 ;*************************************************************************
@@ -140,6 +150,11 @@ load_accB
         movwf       FSR
         movf        INDF, W
         movwf       accB+3
+
+        bcf         STATUS32, ACCBSF            ; set accB SF
+        btfsc       accB+3, 7
+        bsf         STATUS32, ACCBSF
+
         return
 
 
@@ -167,8 +182,31 @@ add32
         btfsc       STATUS, C
         incfsz      accB+3, W
         addwf       accA+3, F
-        btfsc       STATUS, C
+
+        btfsc       STATUS, C                   ; update CF
         bsf         STATUS32, CF
+        banksel     accA
+        btfsc       accA+3, 7                   ; update SF
+        bsf         STATUS32, SF
+
+        btfsc       STATUS32, ACCASF            ; update OF (ACCASF=0 & ACCBSF=0 & SF=1)
+        goto        addtestOF110
+        btfsc       STATUS32, ACCBSF
+        goto        addtestOF110
+        btfsc       STATUS32, SF
+        bsf         STATUS32, OF
+addtestOF110
+        btfss       STATUS32, ACCASF            ; update OF (ACCASF=1 & ACCBSF=1 & SF=0)
+        goto        addendtestOF
+        btfss       STATUS32, ACCBSF
+        goto        addendtestOF
+        btfss       STATUS32, SF
+        bsf         STATUS32, OF
+addendtestOF
+        bcf         STATUS32, ACCASF            ; update accA SF
+        btfsc       accA+3, 7
+        bsf         STATUS32, ACCASF
+
         return
 
 ;*************************************************************************
@@ -195,8 +233,31 @@ sub32                                           ; var3 = var2 - var1
         btfss       STATUS, C
         incfsz      accB+3, W
         subwf       accA+3, F
-;        btfsc       STATUS, C
-;        bsf         ARITH32REG, OVERFLOW
+
+        btfsc       STATUS, C                   ; set CF
+        bsf         STATUS32, CF
+        banksel     accA
+        btfsc       accA+3, 7                   ; update SF
+        bsf         STATUS32, SF
+
+        btfsc       STATUS32, ACCASF            ; update OF (ACCASF=0 & ACCBSF=1 & SF=1)
+        goto        subtestOF110
+        btfss       STATUS32, ACCBSF
+        goto        subtestOF110
+        btfsc       STATUS32, SF
+        bsf         STATUS32, OF
+subtestOF110
+        btfss       STATUS32, ACCASF            ; update OF (ACCASF=1 & ACCBSF=0 & SF=0)
+        goto        subendtestOF
+        btfsc       STATUS32, ACCBSF
+        goto        subendtestOF
+        btfss       STATUS32, SF
+        bsf         STATUS32, OF
+subendtestOF
+        bcf         STATUS32, ACCASF            ; update accA SF
+        btfsc       accA+3, 7
+        bsf         STATUS32, ACCASF
+
         return
 
 
@@ -206,22 +267,22 @@ sub32                                           ; var3 = var2 - var1
 MAINPROGRAM         CODE                        ; begin program
 MAIN
         banksel     var1
-        movlw       .257 & 0xFF
+        movlw       .127 & 0xFF
         movwf       var1
-        movlw       .257 >> .08 % 0xFF
+        movlw       .127 >> .08 % 0xFF
         movwf       var1+1
-        movlw       .257 >> .16 % 0xFF
+        movlw       .127 >> .16 % 0xFF
         movwf       var1+2
-        movlw       .257 >> .24 % 0xFF
+        movlw       .127 >> .24 % 0xFF
         movwf       var1+3
 
-        movlw       .11 & 0xFF
+        movlw       .1 & 0xFF
         movwf       var2
-        movlw       .11 >> .08 % 0xFF
+        movlw       .1 >> .08 % 0xFF
         movwf       var2+1
-        movlw       .11 >> .16 % 0xFF
+        movlw       .1 >> .16 % 0xFF
         movwf       var2+2
-        movlw       .11 >> .24 % 0xFF
+        movlw       .1 >> .24 % 0xFF
         movwf       var2+3
 
 
