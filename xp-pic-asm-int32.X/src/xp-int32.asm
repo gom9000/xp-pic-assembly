@@ -16,8 +16,8 @@
 ; Company....: gos95
 ; Target.....: Microchip PICmicro Mid-Range Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
-; Version....: 1.0 2018/04/11 - start
-; Description: 32-bit integer arithmetic
+; Version....: 1.0 2018/04/11
+; Description: 32-bit (quadruple) integer arithmetic
 ;=============================================================================
 
     PROCESSOR   16f648a
@@ -42,7 +42,7 @@ ACCBSF              EQU     0x5
 
 
 ;=============================================================================
-;  32-BIT PRECISION ARITHMETIC VARIABLE DEFINITIONS
+;  32-BIT PRECISION VARIABLE DEFINITIONS
 ;=============================================================================
 GPR_DATA            UDATA
 var1                RES     4                   ; 32-bit variables
@@ -50,9 +50,9 @@ var2                RES     4                   ;
 
 
 ;=============================================================================
-;  32-BIT PRECISION ARITHMETIC VARIABLE DEFINITIONS
+;  32-BIT PRECISION INTEGER ARITHMETIC VARIABLE DEFINITIONS
 ;=============================================================================
-ARITH32_DATA        UDATA
+INT32_DATA          UDATA
 STATUS32            RES     1                   ; 32-bit arithmetic status register:
                                                 ; <0> carry out flag
                                                 ; <1> sign flag : H = +, L = -
@@ -75,12 +75,12 @@ RESET               CODE    0x0000              ; processor reset vector
 
 
 ;=============================================================================
-;  32-BIT PRECISION ARITHMETIC ROUTINE VECTOR
+;  32-BIT PRECISION INTEGER ARITHMETIC ROUTINE VECTOR
 ;=============================================================================
-ARITH32_CODE        CODE
+INT32_CODE          CODE
 
 ;*************************************************************************
-; Load 32-bit values to accA
+; Load 32-bit value to accA
 ; Value LSB-address in W
 ;*************************************************************************
 load_accA
@@ -119,7 +119,7 @@ load_accA
         return
 
 ;*************************************************************************
-; Load 32-bit values to accB
+; Load 32-bit value to accB
 ; Value LSB-address in W
 ;*************************************************************************
 load_accB
@@ -157,6 +157,46 @@ load_accB
 
         return
 
+;*************************************************************************
+; 32-bit Precision Negating (twos complement notation): accB(32-bit) = -accB(32-bit)
+;*************************************************************************
+negate_accA
+        banksel     accA
+        comf        accA, F                     ; 1 complement of bytes
+        comf        accA+1, F
+        comf        accA+2, F
+        comf        accA+3, F
+        incf        accA, F                     ; add 1
+        btfss       STATUS, Z
+        return
+        incf        accA+1, F
+        btfss       STATUS, Z
+        return
+        incf        accA+2, F
+        btfss       STATUS, Z
+        return
+        incf        accA+3, F
+
+        return
+
+negate_accB
+        banksel     accB
+        comf        accB, F                     ; 1 complement of bytes
+        comf        accB+1, F
+        comf        accB+2, F
+        comf        accB+3, F
+        incf        accB, F                     ; add 1
+        btfss       STATUS, Z
+        return
+        incf        accB+1, F
+        btfss       STATUS, Z
+        return
+        incf        accB+2, F
+        btfss       STATUS, Z
+        return
+        incf        accB+3, F
+
+        return
 
 ;*************************************************************************
 ; 32-bit Precision Addition: accA(32-bit) = accA(32-bit) + accB(32-bit)
@@ -172,7 +212,7 @@ add32
         addwf       accA, F
         movf        accB+1, W                   ; add byte 1
         btfsc       STATUS, C
-        incfsz      accB+1, W
+        incfsz      accB+1, W                   ; add carry into byte 2
         addwf       accA+1, F
         movf        accB+2, W                   ; add byte 2
         btfsc       STATUS, C
@@ -276,13 +316,13 @@ MAIN
         movlw       .127 >> .24 % 0xFF
         movwf       var1+3
 
-        movlw       .1 & 0xFF
+        movlw       .126 & 0xFF
         movwf       var2
-        movlw       .1 >> .08 % 0xFF
+        movlw       .126 >> .08 % 0xFF
         movwf       var2+1
-        movlw       .1 >> .16 % 0xFF
+        movlw       .126 >> .16 % 0xFF
         movwf       var2+2
-        movlw       .1 >> .24 % 0xFF
+        movlw       .126 >> .24 % 0xFF
         movwf       var2+3
 
 
@@ -296,7 +336,8 @@ MAIN
         pagesel     load_accB
         call        load_accB
 
-        call        sub32
+        call        negate_accB
+        call        add32
 
         nop
 
