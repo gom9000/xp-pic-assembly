@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PICmicro 16F648a Microcontroller
+; Target.....: Microchip MidRange PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/13 - source refactory
 ;              1.0 2017/04/08
@@ -32,7 +32,7 @@
 
 
 ;=============================================================================
-;  LABEL EQUATES
+;  CONSTANT DEFINITIONS
 ;=============================================================================
 SWITCH              EQU     PORTB
 SW1                 EQU     0x00
@@ -90,24 +90,26 @@ RESET               CODE    0x0000              ; processor reset vector
 ;  INIT ROUTINES
 ;=============================================================================
 INIT_ROUTINES       CODE                        ; routines vector
-init_ports                                      ; init I/O ports
-        errorlevel  -302
+init_ports
 
-        ; set PORTA JA1(A0-A3) as Output
+        errorlevel	-302
+
+        ; init PORTA
         banksel     PORTA
-        clrf        PORTA                       ; initialize PORTB by clearing output data latches
-        movlw       h'07'                       ; turn comparators off
-        movwf       CMCON                       ; and set port A mode I/O digital
-        banksel     TRISA
-        movlw       b'11100000'                 ; PORTA input/output
-  		movwf		TRISA
+        clrf        PORTA                       ; initialize PORTA by clearing output data latches
+        movlw       h'07'
+        banksel     CMCON
+        movwf       CMCON                       ; turn comparators off and set PORTA mode I/O digital
+        movlw       ~(1<<RA0|1<<RA1|1<<RA2|1<<RA3)
+        banksel     TRISA                       ; configure RA0-3 as outputs
+        movwf       TRISA
 
-        ; set JB1 (B0-B3) as Input
+        ; init PORTB
         banksel     PORTB
         clrf        PORTB                       ; initialize PORTB by clearing output data latches
+        movlw       1<<RB0|1<<RB1|1>>RB2|1<<RB3
         banksel     TRISB
-        movlw       b'00001111'                 ; PORTB input/output
-        movwf		TRISB
+        movwf       TRISB                       ; configure RB0-3 as inputs
 
         errorlevel  +302
 

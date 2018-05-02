@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PICmicro 16F648a Microcontroller
+; Target.....: Microchip MidRange PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/03/21
@@ -47,7 +47,7 @@
 
 
 ;=============================================================================
-;  LABEL EQUATES
+;  CONSTANT DEFINITIONS
 ;=============================================================================
     constant MHZ_20 = .20
     constant MHZ_16 = .16
@@ -60,7 +60,7 @@
 
 
 ;=============================================================================
-;  FILE REGISTER USE
+;  VARIABLE DEFINITIONS
 ;=============================================================================
     CBLOCK	0x020
         d1, d2, d3                              ; delay routines variables
@@ -71,9 +71,9 @@
 ;  MACROS
 ;=============================================================================
 
-;
+; ---------------------------------------------
 ;  delay for ms milliseconds between 1 and 255
-;
+; ---------------------------------------------
 delayMS         MACRO   ms
     IF (ms > .250)
         ERROR "Maximum delay time allowed is 255ms"

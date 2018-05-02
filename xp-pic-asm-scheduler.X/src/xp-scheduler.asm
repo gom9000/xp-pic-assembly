@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PICmicro 16F648A Microcontroller
+; Target.....: Microchip MidRange PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/03/21
@@ -34,7 +34,7 @@
 
 
 ;=============================================================================
-;  LABEL EQUATES
+;  CONSTANT DEFINITIONS
 ;=============================================================================
 
 ;----- SCREG overflow bitflags -----------------------------------------------
@@ -61,7 +61,7 @@ SC8CYCLES           EQU     d'2'                ; 2 x SC7 cycles    =10000000
 
 
 ;=============================================================================
-;  FILE REGISTER USE
+;  VARIABLE DEFINITIONS
 ;=============================================================================
     CBLOCK	0x020
         SCREG                                   ; scheduler bitflags register

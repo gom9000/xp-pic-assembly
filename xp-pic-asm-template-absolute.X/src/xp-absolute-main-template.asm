@@ -41,20 +41,27 @@
 
 
 ;=============================================================================
-;  LABEL EQUATES
+;  CONSTANT DEFINITIONS
 ;=============================================================================
 stuffc              EQU     0x01                ; assign value 1 to label stuffc 
+    CONSTANT    CONST1 = .1
 
 
 ;=============================================================================
-;  FILE REGISTER USE
+;  VARIABLE DEFINITIONS
 ;=============================================================================
     CBLOCK	0x020
         w_temp                                  ; variable used for context saving
         status_temp                             ; variable used for context saving
         pclath_temp                             ; variable used for context saving
         twoByteVar: 0, twoByteH, twoByteL
+        doubleWordVar: 2
     ENDC
+
+
+;=============================================================================
+;  MACROS
+;=============================================================================
 
 
 ;=============================================================================

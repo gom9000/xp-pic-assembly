@@ -18,8 +18,7 @@
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.1 2018/03/11 - source refactory
 ;              1.0 2017/05/20
-; Description:
-;  Label equates.
+; Description: Constant Definitions
 ;=============================================================================
 
 ;----- SCREG overflow bitflags -----------------------------------------------

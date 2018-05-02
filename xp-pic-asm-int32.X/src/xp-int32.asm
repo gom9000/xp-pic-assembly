@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip PICmicro Mid-Range Microcontroller
+; Target.....: Microchip MidRange PICmicro
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.0 2018/04/11
 ; Description: 32-bit (quadruple) integer arithmetic
@@ -31,7 +31,7 @@
 
 
 ;=============================================================================
-;  LABEL EQUATES
+;  CONSTANT DEFINITIONS
 ;=============================================================================
 CF                  EQU     0x0
 SF                  EQU     0x1
