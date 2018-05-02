@@ -78,9 +78,11 @@ init_ports
         ; init PORTA
         banksel     PORTA
         clrf        PORTA                       ; initialize PORTA by clearing output data latches
+
         movlw       h'07'
         banksel     CMCON
         movwf       CMCON                       ; turn comparators off and set PORTA mode I/O digital
+
         movlw       ~(1<<RA0|1<<RA1|1<<RA2|1<<RA3)
         banksel     TRISA                       ; configure RA0-3 as outputs
         movwf       TRISA
@@ -88,6 +90,7 @@ init_ports
         ; init PORTB
         banksel     PORTB
         clrf        PORTB                       ; initialize PORTB by clearing output data latches
+
         movlw       1<<RB0|1<<RB1|1>>RB2|1<<RB3
         banksel     TRISB
         movwf       TRISB                       ; configure RB0-3 as inputs
@@ -102,82 +105,9 @@ init_ports
 ;=============================================================================
 DELAY_ROUTINES      CODE                        ; routines vector
 
-;  1s delay routine (20MHz)
-delay1s
-        movlw       0x2C                        ;4999993 cycles
-        movwf       d1
-        movlw       0xE7
-        movwf       d2
-        movlw       0x0B
-        movwf       d3
-delay1s_loop
-        decfsz      d1, F
-        goto        $+2
-        decfsz      d2, F
-        goto        $+2
-        decfsz      d3, F
-        goto        delay1s_loop
-        goto        $+1                         ;3 cycles
-        nop
-
-        return                                  ;4 cycles (including call)
-
-
-;  100ms delay routine (20MHz)
-delay100ms
-        movlw       0x03                        ;499994 cycles
-        movwf       d1
-        movlw       0x18
-        movwf       d2
-        movlw       0x02
-        movwf       d3
-delay100ms_loop
-        decfsz      d1, F
-        goto        $+2
-        decfsz      d2, F
-        goto        $+2
-        decfsz      d3, F
-        goto        delay100ms_loop
-        goto        $+1                         ;2 cycles
-
-        return                                  ;4 cycles (including call)
-
-
-;  50ms delay routine (20MHz)
-delay50ms
-        movlw       0x4E                        ;249993  cycles
-        movwf       d1
-        movlw       0xC4
-        movwf       d2
-delay50ms_loop
-        decfsz      d1, F
-        goto        $+2
-        decfsz      d2, F
-        goto        delay50ms_loop
-        goto        $+1                         ;3 cycles
-        nop
-
-        return                                  ;4 cycles (including call)
-
-
-;  25ms delay routine (20MHz)
-delay25ms
-        movlw       0xA6                        ;124993  cycles
-        movwf       d1
-        movlw       0x62
-        movwf       d2
-delay25ms_loop
-        decfsz      d1, F
-        goto        $+2
-        decfsz      d2, F
-        goto        delay25ms_loop
-        goto        $+1                         ;3 cycles
-        nop
-
-        return                                  ;4 cycles (including call)
-
-
+; ---------------------------------------------------------------------------
 ;  10ms delay routine (20MHz)
+; ---------------------------------------------------------------------------
 delay10ms
         movlw       0x0E                        ;49993 cycles
         movwf       d1
@@ -193,8 +123,9 @@ delay10ms_loop
 
         return                                  ;4 cycles (including call)
 
-
+; ---------------------------------------------------------------------------
 ;  5ms delay routine (20MHz)
+; ---------------------------------------------------------------------------
 delay5ms
         movlw       0x86                        ;24993 cycles
         movwf       d1
@@ -210,8 +141,9 @@ delay5ms_loop
 
         return                                  ;4 cycles (including call)
 
-
+; ---------------------------------------------------------------------------
 ;  1ms delay routine (20MHz)
+; ---------------------------------------------------------------------------
 delay1ms
         movlw       0xE6                        ;4993 cycles
         movwf       d1

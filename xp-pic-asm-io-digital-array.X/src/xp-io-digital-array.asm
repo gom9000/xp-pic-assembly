@@ -97,9 +97,11 @@ init_ports
         ; init PORTA
         banksel     PORTA
         clrf        PORTA                       ; initialize PORTA by clearing output data latches
+
         movlw       h'07'
         banksel     CMCON
         movwf       CMCON                       ; turn comparators off and set PORTA mode I/O digital
+
         movlw       ~(1<<RA0|1<<RA1|1<<RA2|1<<RA3)
         banksel     TRISA                       ; configure RA0-3 as outputs
         movwf       TRISA
@@ -107,6 +109,7 @@ init_ports
         ; init PORTB
         banksel     PORTB
         clrf        PORTB                       ; initialize PORTB by clearing output data latches
+
         movlw       1<<RB0|1<<RB1|1>>RB2|1<<RB3
         banksel     TRISB
         movwf       TRISB                       ; configure RB0-3 as inputs
