@@ -14,7 +14,7 @@
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
-; Target.....: Microchip MidRange PICmicro
+; Target.....: Microchip PICmicro MidRange Microcontroller
 ; Compiler...: Microchip Assembler (MPASM)
 ; Version....: 1.0 2018/04/11
 ; Description: 32-bit (quadruple) integer arithmetic

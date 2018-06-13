@@ -1,5 +1,5 @@
 # PIC Assembly eXPerience
-Various MPLAB-X home didactic projects to learn Mid-Range PICmicro assembly programming.
+Various MPLAB-X home projects to learn Mid-Range PICmicro assembly programming.
 
 
 ## Contents of the repository
