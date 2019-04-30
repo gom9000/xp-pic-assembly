@@ -6,11 +6,10 @@
 ; / /_/  >  <_> )___ \    /    //       \
 ; \___  / \____/____  >  /____//______  /
 ;/_____/            \/                \/ 
-; Copyright (c) 2018 by Alessandro Fraschetti (gos95@gommagomma.net).
+; Copyright (c) 2018 Alessandro Fraschetti (gos95@gommagomma.net).
 ;
-; This file is part of the xp-pic-asm project:
-;     https://github.com/gos95-electronics/xp-pic-asm
-; This code comes with ABSOLUTELY NO WARRANTY.
+; This file is part of the pic-assembly-xp project:
+;     https://github.com/pic-assembly-xp
 ;
 ; Author.....: Alessandro Fraschetti
 ; Company....: gos95
