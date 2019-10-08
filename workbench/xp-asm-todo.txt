@@ -2,27 +2,32 @@ PIC Assembly eXPerience
 
 PHASE II
 --------
+- add README inside each eXPerience folder with references to used MOB boards;
+- split experiences by: tecniques vs peripherals ???
 
-- xp-pic-asm-io-digital-matrix
-- xp-pic-asm-io-digital-7seg
-- xp-pic-asm-io-digital-lcd
+- add new eXPeriences:
 
-- xp-pic-asm-io-analog-adc
-	
-- xp-pic-asm-usart
-    serial rs232 helo server for drive led on/off/blink
-- xp-pic-asm-usart-library:
-    routine for port TX/RX pin settings
+	- xp-pic-asm-adc
+	- xp-pic-asm-spi-digitalpot
 
--tebos:
-	- tebo-psu-5
-	- tebo-psu-distrib
-	- tebo-mcu-pic16f6x8
-	- tebo-io-switch-led-array-4
-	- tebo-io-switch-matrix-4x4
-	- tebo-io-led-matrix-4x4
-	- tebo-io-display-7seg
-	- tebo-io-lcd-16x2
-	- tebo analog-input-2
-	- tebo display-7seg
-	- tebo rs232	
+	- xp-pic-asm-io-matrix
+	- xp-pic-asm-io-7seg
+	- xp-pic-asm-io-lcd16x2
+
+	- xp-pic-asm-usart
+	    serial rs232 helo server for drive led on/off/blink
+	- xp-pic-asm-usart-library:
+	    routine for port TX/RX pin settings
+
+
+- some related MOBs:
+	- mob-psu-5v
+	- mob-psu-distrib
+	- mob-mcu-pic16f6x8
+	- mob-4bit-array-switch-and-led
+	- mob-4bit-matrix-switch
+	- mob-4bit-matrix-led
+	- mob-4bit-7seg
+	- mob-8bit-7seg
+	- mob-8bit-dac
+	- mob-rs232	
