@@ -2,9 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="xp-pic-asm">
-            <file>file:/C:/data/github/gos95-electronics-experience/xp-pic-asm/xp-pic-asm-scheduler.X/src/xp-pic-scheduler.asm</file>
-        </group>
         <group/>
+        <group name="xp-pic-asm">
+            <file>file:/D:/MYA/mya.alex.personal.electronics/experiences/xp-pic-assembly/xp-pic-asm-scheduler/xp-pic-asm-scheduler.X/src/xp-scheduler.asm</file>
+        </group>
+        <group name="xp-pic-assembly"/>
     </open-files>
 </project-private>

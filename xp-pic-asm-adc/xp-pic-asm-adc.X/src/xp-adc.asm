@@ -89,7 +89,7 @@
     constant MHZ_4  = .4
     constant MHZ_1  = .1
 
-    constant OSCFREQ = MHZ_20
+    constant OSCFREQ = MHZ_4
 
 
 
@@ -418,7 +418,8 @@ delay500ms_loop
 
 ;Subroutine getADC =========================
 getADC
-        call        delay10ms ;warm up
+        call        delay1ms ;warm up
+        call        delay1ms ;warm up
         banksel     ADCON0
         bsf         ADCON0, GO ;start conversion
 ADCloop
@@ -459,7 +460,7 @@ MAIN                                            ; begin program
 
         banksel     DPOT
         bsf         DPOT, CS
-
+        
 loop
         banksel     ADCON0
         movlw       b'11000001'
@@ -472,9 +473,7 @@ loop
         movwf       ADCON0                      ; initialize ADC (RA1 is ADC port)
         call        getADC
         movwf       adc_value2
-
-        
-
+ 
         banksel     PORTB
         movwf       PORTB
 
@@ -486,7 +485,7 @@ loop
         call        sendData
         bsf         DPOT, CS
 
-        call        delay10ms
+        call        delay1ms
 
         goto        loop
 
