@@ -45,3 +45,9 @@ A simple scheduler manager for executing tasks at regular intervals:
 
 * [xp-pic-asm-int32](xp-pic-asm-int32/xp-pic-asm-int32.X/)
 -- implementation of 32-bit (quadruple) integer arithmetic
+
+### PIC modules
+PIC modules routines:
+
+* [xp-pic-asm-adc](xp-pic-asm-adc/xp-pic-asm-adc.X/)
+-- Read ADC values from potentiometer and put on 8-bit led array
