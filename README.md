@@ -4,7 +4,7 @@ Various MPLAB-X home projects to learn Mid-Range PICmicro assembly programming.
 
 ## Contents
 
-### Code Templates
+### [Code Templates](xp-pic-asm-template)
 Assembly code templates for absolute and relocatable code sources:
 
 * [xp-pic-asm-template-absolute](xp-pic-asm-template/xp-pic-asm-template-absolute.X/)
@@ -12,7 +12,7 @@ Assembly code templates for absolute and relocatable code sources:
 * [xp-pic-asm-template-relocatable](xp-pic-asm-template/xp-pic-asm-template-relocatable.X/)
 -- template for relocatable code sources
 
-### Delay
+### [Delay](xp-pic-asm-delay)
 Delay routines:
 
 * [xp-pic-asm-delay](xp-pic-asm-delay/xp-pic-asm-delay.X/)
@@ -22,7 +22,7 @@ Delay routines:
 * [xp-pic-asm-delay-library-test](xp-pic-asm-delay/xp-pic-asm-delay-library-test.X/)
 -- test code for the delay library
 
-### I/O
+### [I/O](xp-pic-asm-io)
 Input/Output management routines:
 
 * [xp-pic-asm-io-digital-debounce](xp-pic-asm-io/xp-pic-asm-io-digital-debounce.X/)
@@ -30,7 +30,7 @@ Input/Output management routines:
 * [xp-pic-asm-io-digital-array](xp-pic-asm-io/xp-pic-asm-io-digital-array.X/)
 -- software management for arrays of input switch and led
 
-### Scheduler
+### [Scheduler](xp-pic-asm-scheduler)
 A simple scheduler manager for executing tasks at regular intervals:
 
 * [xp-pic-asm-scheduler](xp-pic-asm-scheduler/xp-pic-asm-scheduler.X/)
@@ -40,14 +40,14 @@ A simple scheduler manager for executing tasks at regular intervals:
 * [xp-pic-asm-scheduler-library-test](xp-pic-asm-scheduler/xp-pic-asm-scheduler-library-test.X/)
 -- test code for scheduler library
 
-### 32-bit
+### [32-bit](xp-pic-asm-int32)
 32-bit arithmetic routines:
 
 * [xp-pic-asm-int32](xp-pic-asm-int32/xp-pic-asm-int32.X/)
 -- implementation of 32-bit (quadruple) integer arithmetic
 
-### PIC modules
-PIC modules routines:
+### [ADC](xp-pic-asm-adc)
+ADC module routines:
 
 * [xp-pic-asm-adc](xp-pic-asm-adc/xp-pic-asm-adc.X/)
 -- Read ADC values from potentiometer and put on 8-bit led array
