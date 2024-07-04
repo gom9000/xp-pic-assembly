@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="65">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>src/xp-delay-cycles-10000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-100000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-1250000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-2500.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-25000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-250000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-2500000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-4000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-5000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-50000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-500000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-5000000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-library.inc</itemPath>
+      <itemPath>src/xp-delay-cycles-1000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-40000.asm</itemPath>
+      <itemPath>src/xp-delay-cycles-400000.asm</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>src</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="default" type="3">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC16F648A</targetDevice>
+        <targetHeader></targetHeader>
+        <targetPluginBoard></targetPluginBoard>
+        <platformTool></platformTool>
+        <languageToolchain>MPASMWIN</languageToolchain>
+        <languageToolchainVersion>5.87</languageToolchainVersion>
+        <platform>3</platform>
+      </toolsSet>
+      <packs>
+        <pack name="PIC16Fxxx_DFP" vendor="Microchip" version="1.2.33"/>
+      </packs>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <archiverTool>
+        </archiverTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <parseOnProdLoad>false</parseOnProdLoad>
+          <alternateLoadableFile></alternateLoadableFile>
+        </loading>
+        <subordinates>
+        </subordinates>
+      </compileType>
+      <makeCustomizationType>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep></makeCustomizationPostStep>
+        <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
+        <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
+        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+      </makeCustomizationType>
+      <MPASMWIN-AS>
+        <property key="cross.reference.file" value=""/>
+        <property key="default.radix" value="HEX"/>
+        <property key="enable.case.sensitivity" value="true"/>
+        <property key="hex.output.format" value="INHX32"/>
+        <property key="preprocessor.macros" value=""/>
+        <property key="warning.level" value="0"/>
+      </MPASMWIN-AS>
+      <mpasmsuite>
+        <property key="absolute-mode" value="false"/>
+        <property key="eeprom-width" value="8"/>
+        <property key="extended-mode" value="false"/>
+        <property key="extended-mode-mpasm" value="false"/>
+        <property key="extended-mode-mplink" value="false"/>
+      </mpasmsuite>
+    </conf>
+  </confs>
+</configurationDescriptor>
